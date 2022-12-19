@@ -4,10 +4,10 @@ const NavbarComponents = () => {
     return (
       <>
         <div className="wrapper">
-          <nav className="main-header navbar navbar-expand-md navbar-dark navbar-dark" style={{marginLeft: "unset"}}>
+          <nav className="main-header navbar navbar-expand-md navbar-dark navbar-dark border-0 p-3" style={{marginLeft: "unset", background: "transparent"}}>
             <div className="container">
               <a href="" className="navbar-brand">
-                <img src="https://s2.coinmarketcap.com/static/img/coins/200x200/17050.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3 mr-2" style={{opacity: "0.8", height: "1.8rem"}} />
+                <img src="https://s2.coinmarketcap.com/static/img/coins/200x200/17050.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3 mr-2" style={{opacity: "0.8", height: "1.8rem"}} />
                 <span className="brand-text font-weight-light">Multichain</span>
               </a>
   
@@ -28,7 +28,7 @@ const NavbarComponents = () => {
                       Assets
                     </a>
                   </li>
-                  <li className="nav-item">
+                  <li className={ window.location.pathname === "/addresses" ? "nav-item link-active" : "nav-item"}>
                     <Link to="/addresses" className="nav-link">
                       Addresses
                     </Link>

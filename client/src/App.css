@@ -1,3 +1,49 @@
 body{
   font-family: "Poppins" !important;
+  background-color: black;
+}
+
+/* .main-container{
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url("https://dexsport.io/img/9fca7669858edb5beed0.webp");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  z-index: 2;
+} */
+
+.main-container::after{
+  content: "";
+  position: absolute;
+  background: url("https://dexsport.io/img/c5bc46200cd11faaa21a.webp") no-repeat;
+  background-size: 100% 100%;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1000px;
+  z-index: -1;
+}
+
+.imgBlur{
+  position: absolute;
+  width: -webkit-fill-available;
+  -webkit-filter: blur(1px); /* Safari 6.0 - 9.0 */
+  filter: blur(10px);
+}
+
+.nav-item{
+  margin-left: 7px !important;
+}
+
+.link-active{
+  background: rgba(255, 255, 255, 0.09);
+  border-radius: 15px;
+  border: solid 1px rgba(255, 255, 255, 0.3);
+}
+
+.transparent-card{
+  background: rgba(255, 255, 255, 0.09);
+  color: white;
 }
