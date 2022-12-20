@@ -27,4 +27,54 @@ router.get('/list-addresses', async(req, res) => {
     });
 });
 
+router.post('/new-address', async(req, res) => {
+    var payload = {
+        "method" : "getnewaddress",
+        "params" : [],
+        "id" : 1,
+        "chain_name" : "dexChain"
+    };
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "New Addresses Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
+router.post('/grant-address', async(req, res) => {
+    const { address, type } = req.body;
+
+    if(!address || !type){
+        return res.status(500).send({ status: "error", message: "Please provide address & permission" })
+    }
+
+    var payload = {
+        "method" : "grant",
+        "params" : [address, type],
+        "id" : 1,
+        "chain_name" : "dexChain"
+    };
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "New Addresses Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
 module.exports = router;
