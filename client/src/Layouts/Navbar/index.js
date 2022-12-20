@@ -1,35 +1,43 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 const NavbarComponents = () => {
+    const location = useLocation();
+
+    useEffect(() => {
+      console.log('Location changed');
+      console.log(location)
+    }, [location])
+
     return (
       <>
         <div className="wrapper">
           <nav className="main-header navbar navbar-expand-md navbar-dark navbar-dark border-0 p-3" style={{marginLeft: "unset", background: "transparent"}}>
             <div className="container">
-              <a href="" className="navbar-brand">
+              <Link to="/" className="navbar-brand">
                 <img src="https://s2.coinmarketcap.com/static/img/coins/200x200/17050.png" alt="AdminLTE Logo" className="brand-image img-circle elevation-3 mr-2" style={{opacity: "0.8", height: "1.8rem"}} />
                 <span className="brand-text font-weight-light">Multichain</span>
-              </a>
+              </Link>
   
               <div className="collapse navbar-collapse order-3" id="navbarCollapse">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <a href="" className="nav-link">
-                      Transaction
-                    </a>
+                    <Link to="/transactions" className={ window.location.pathname === "/transactions" ? "nav-link link-active" : "nav-link"}>
+                      Transactions
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="" className="nav-link">
+                    <Link to="/streams" className={ window.location.pathname === "/streams" ? "nav-link link-active" : "nav-link"}>
                       Streams
-                    </a>
+                    </Link>
                   </li>
                   <li className="nav-item">
-                    <a href="" className="nav-link">
+                    <Link to="/assets" className={ window.location.pathname === "/assets" ? "nav-link link-active" : "nav-link"}>
                       Assets
-                    </a>
+                    </Link>
                   </li>
-                  <li className={ window.location.pathname === "/addresses" ? "nav-item link-active" : "nav-item"}>
-                    <Link to="/addresses" className="nav-link">
+                  <li className="nav-item">
+                    <Link to="/addresses" className={ window.location.pathname === "/addresses" ? "nav-link link-active" : "nav-link"}>
                       Addresses
                     </Link>
                   </li>

@@ -1,20 +1,5 @@
-import { useEffect, useState } from "react"
-import { getAddresses } from "../../Services/api";
 
 const AddressesCompoenent = () => {
-
-  useEffect(() => {
-    getList();
-  }, [])
-
-  const getList = async() => {
-    const res = await getAddresses();
-    if (res.status === 200) {
-      console.log("res: ", res);
-    } else if (res.status === 500) {
-    }
-  }
-
 
   return (
     <>
