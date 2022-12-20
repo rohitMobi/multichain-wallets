@@ -10,13 +10,7 @@
         }
     },
     "host": "localhost:5000",
-    "basePath": "/",
-    "tags": [
-        {
-            "name": "Streams",
-            "description": "Stream like data storage"
-        }
-    ],
+    "basePath": "/api/v1/",
     "schemes": [
         "http"
     ],
@@ -37,6 +31,50 @@
               }
             }
           }
+        },
+        "/streams/list-streams": {
+            "get": {
+                "tags": ["Streams"],
+                "summary": "List of all streams",
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+            }
+        },
+        "/assets/list-assets": {
+            "get": {
+                "tags": ["Assets"],
+                "summary": "List of all assets",
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+            }
+        },
+        "/addresses/list-addresses": {
+            "get": {
+                "tags": ["Addresses"],
+                "summary": "List of all addresses",
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+            }
+        },
+        "/transactions/list-transactions": {
+            "get": {
+                "tags": ["Transactions"],
+                "summary": "List of all transactions",
+                "responses": {
+                  "200": {
+                    "description": "OK"
+                  }
+                }
+            }
         }
     }
 }
