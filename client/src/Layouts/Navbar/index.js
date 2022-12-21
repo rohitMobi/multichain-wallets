@@ -21,24 +21,24 @@ const NavbarComponents = () => {
   
               <div className="collapse navbar-collapse order-3" id="navbarCollapse">
                 <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <Link to="/transactions" className={ window.location.pathname === "/transactions" ? "nav-link link-active" : "nav-link"}>
-                      Transactions
-                    </Link>
-                  </li>
                   {/* <li className="nav-item">
                     <Link to="/streams" className={ window.location.pathname === "/streams" ? "nav-link link-active" : "nav-link"}>
                       Streams
+                    </Link>
+                  </li> */}
+                  <li className="nav-item">
+                    <Link to="/addresses" className={ window.location.pathname === "/addresses" ? "nav-link link-active" : "nav-link"}>
+                      Addresses
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to="/assets" className={ window.location.pathname === "/assets" ? "nav-link link-active" : "nav-link"}>
                       Assets
                     </Link>
-                  </li> */}
+                  </li>
                   <li className="nav-item">
-                    <Link to="/addresses" className={ window.location.pathname === "/addresses" ? "nav-link link-active" : "nav-link"}>
-                      Addresses
+                    <Link to="/transactions" className={ window.location.pathname === "/transactions" ? "nav-link link-active" : "nav-link"}>
+                      Transactions
                     </Link>
                   </li>
                 </ul>

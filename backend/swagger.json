@@ -35,6 +35,29 @@
           "address": "1GhnrnZhMwtSFetWETKoRzsJ9hzrQ4Jj1n7f1R",
           "type": "issue"
         }
+      },
+      "CreateAssets": {
+        "required": ["address", "assetsName", "quantity", "smallestUnit"],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "assetsName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          },
+          "smallestUnit": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "address": "18NAjmzfDTJWbNSebGyipKKBPXrtbJimJpTqis",
+          "assetsName": "ZTK",
+          "quantity": "1000",
+          "smallestUnit": "0.01"
+        }
       }
     },
     "paths": {
@@ -70,6 +93,27 @@
                   }
                 }
             }
+        },
+        "/assets/create-assets": {
+          "post": {
+              "tags": ["Assets"],
+              "summary": "Create new assets",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "address, assets name, quantity, smallest unit these all includes",
+                  "schema": {
+                    "$ref": "#/definitions/CreateAssets"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
         },
         "/addresses/list-addresses": {
             "get": {

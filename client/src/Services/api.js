@@ -46,3 +46,38 @@ export const getTransactions = async() => {
 
     return res;
 }
+
+
+export const getAssets = async() => {
+    const res = await axios(`${base_url}assets/list-assets`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
+export const createAssets = async(address, assetsName, quantity, smallestUnit) => {
+    var payload = {
+        address: address, assetsName: assetsName, quantity: quantity, smallestUnit: smallestUnit
+    }
+    const res = await axios(`${base_url}/assets/create-assets`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}

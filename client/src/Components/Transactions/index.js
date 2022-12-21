@@ -43,12 +43,12 @@ const TransactionsCompoenent = () => {
                           <th>To address</th>
                           <th>Block Hash</th>
                           <th>Transaction Id</th>
-                          <th>Date & Time</th>
+                          {/* <th>Date & Time</th> */}
                         </tr>
                       </thead>
                       <tbody>
                         {
-                          list.length > 0 &&
+                          list.length > 0 ?
                           list.map((ele, index) => {
                             return(<>
                               <tr>
@@ -57,10 +57,12 @@ const TransactionsCompoenent = () => {
                                 <td>{changeAddressFormat(ele.addresses[0])}</td>
                                 <td>{changeAddressFormat(ele.blockhash)}</td>
                                 <td>{changeAddressFormat(ele.txid)}</td>
-                                <td>{ele.time} {format(new Date(ele.time), 'dd/MM/yyyy')}</td>
+                                {/* <td>{ele.time} {format(new Date(ele.time), 'dd/MM/yyyy')}</td> */}
                               </tr>
                             </>)
                           })
+                          :
+                          <><tr><td colSpan={5} className="text-center">No transactions found.</td></tr></>
                         }
                       </tbody>
                     </table>
