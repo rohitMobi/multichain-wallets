@@ -59,7 +59,7 @@ export const getAssets = async() => {
     }).catch((err) => {
         return err.response;
     });
-
+    
     return res;
 }
 

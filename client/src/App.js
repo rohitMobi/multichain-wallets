@@ -12,7 +12,7 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <>
-      <Toaster />
+      <Toaster position="bottom-center" />
       <NavbarComponents />
       <div className='main-container'></div>
       <Routes>
