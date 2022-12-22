@@ -58,6 +58,25 @@
           "quantity": "1000",
           "smallestUnit": "0.01"
         }
+      },
+      "TransferToken": {
+        "required": ["address", "assetsName", "quantity"],
+        "properties": {
+          "address": {
+            "type": "string"
+          },
+          "assetsName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "address": "1DzvuGqfHz9poTXCjF9K4r5eTxgskSm6doBWfr",
+          "assetsName": "ZTK",
+          "quantity": "50"
+        }
       }
     },
     "paths": {
@@ -116,6 +135,27 @@
                   "description": "address, assets name, quantity, smallest unit these all includes",
                   "schema": {
                     "$ref": "#/definitions/CreateAssets"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
+        "/assets/transfer-token": {
+          "post": {
+              "tags": ["Assets"],
+              "summary": "Token Transfer",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "address, assets name, quantity these all includes",
+                  "schema": {
+                    "$ref": "#/definitions/TransferToken"
                   }
                 }
               ],
