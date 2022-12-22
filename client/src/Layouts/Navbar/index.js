@@ -41,6 +41,11 @@ const NavbarComponents = () => {
                       Transactions
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to="/balance" className={ window.location.pathname === "/balance" ? "nav-link link-active" : "nav-link"}>
+                      Balance
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>

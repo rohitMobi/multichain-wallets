@@ -94,6 +94,17 @@
                 }
             }
         },
+        "/assets/list-gettotalbalances": {
+          "get": {
+              "tags": ["Assets"],
+              "summary": "List of all get total balances",
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
         "/assets/create-assets": {
           "post": {
               "tags": ["Assets"],

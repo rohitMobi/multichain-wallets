@@ -63,6 +63,21 @@ export const getAssets = async() => {
     return res;
 }
 
+export const gettotalbalances = async() => {
+    const res = await axios(`${base_url}assets/list-gettotalbalances`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+    
+    return res;
+}
+
 export const createAssets = async(address, assetsName, quantity, smallestUnit) => {
     var payload = {
         address: address, assetsName: assetsName, quantity: quantity, smallestUnit: smallestUnit

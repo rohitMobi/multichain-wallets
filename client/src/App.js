@@ -8,6 +8,7 @@ import StreamsCompoenent from './Components/Streams';
 import TransactionsCompoenent from './Components/Transactions';
 import AssetsCompoenent from './Components/Assets';
 import { Toaster } from 'react-hot-toast';
+import TotalBalanceCompoenent from './Components/Balance';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/transactions' element={<TransactionsCompoenent />} />
         <Route path='/assets' element={<AssetsCompoenent />} />
         <Route path='/addresses' element={<AddressesCompoenent />} />
+        <Route path='/balance' element={<TotalBalanceCompoenent />} />
       </Routes>
     </>
   );
