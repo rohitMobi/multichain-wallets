@@ -20,7 +20,7 @@ function App() {
         <Route path='/' element={<DashboardCompoenent />} />
         <Route path='/streams' element={<StreamsCompoenent />} />
         <Route path='/transactions' element={<TransactionsCompoenent />} />
-        <Route path='/assets' element={<AssetsCompoenent />} />
+        <Route path='/tokens' element={<AssetsCompoenent />} />
         <Route path='/addresses' element={<AddressesCompoenent />} />
         <Route path='/balance' element={<TotalBalanceCompoenent />} />
       </Routes>

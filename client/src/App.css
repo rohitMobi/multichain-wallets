@@ -56,7 +56,8 @@ body{
 }
 
 .bg-transparent-blue:hover{
-  box-shadow: rgba(66, 133, 244, 0.09) 0px 10px 36px 0px, rgba(66, 133, 244, 0.09) 0px 0px 0px 1px;
+  box-shadow: rgba(255, 193, 7, 0.3) 0px 10px 36px 0px, rgba(255, 193, 7, 0.09) 0px 0px 0px 1px;
+  border-bottom: solid 1px rgb(255, 193, 7);
 }
 
 .bg-transparent-blue::before{
@@ -78,7 +79,7 @@ body{
     height: 133px;
     bottom: 0;
     right: 0;
-    transition: width 1s, height 1s;
+    transition: width 0.5s, height 0.5s;
 }
 
 .bg-transparent-blue:hover .right-gold{

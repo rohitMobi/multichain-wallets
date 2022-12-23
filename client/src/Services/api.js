@@ -96,3 +96,22 @@ export const createAssets = async(address, assetsName, quantity, smallestUnit) =
 
     return res;
 }
+
+export const tokenTransafer = async(address, assetsName, quantity) => {
+    var payload = {
+        address: address, assetsName: assetsName, quantity: quantity
+    }
+    const res = await axios(`${base_url}assets/transfer-token`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
