@@ -47,7 +47,7 @@ const AddressesCompoenent = () => {
                   </>
                   :
                   <>
-                    Generate Address
+                    Generate New Address
                   </>
                 } 
               </button>

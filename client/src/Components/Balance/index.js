@@ -10,9 +10,9 @@ const TotalBalanceCompoenent = () => {
     getList();
   }, [])
 
-  const getList = async() => {
+  const getList = async () => {
     const res = await gettotalbalances();
-    if(res.status === 200){
+    if (res.status === 200) {
       setList(res.data.data)
     }
   }
@@ -28,12 +28,34 @@ const TotalBalanceCompoenent = () => {
           </div>
           <div className="row mt-3">
             <div className="col-md-12">
-              <div className="card transparent-card">
+              <div className="row">
+                {
+                  list.length > 0 ?
+                    list.map((ele, index) => {
+                      return (<>
+                        <div class="col-lg-3 col-6">
+                          <div class="small-box bg-transparent-blue">
+                            <div className="right-gold"></div>
+                            <div class="inner">
+                              <h3>{ele.qty}</h3>
+                              <p>{ele.name}</p>
+                            </div>
+                            <div class="icon">
+                              <i class="ion ion-bag"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </>)
+                    }) :
+                    <><div className="col-lg-12 text-center text-white">No balance found</div></>
+                }
+              </div>
+              {/* <div className="card transparent-card">
                 <div className="card-body p-0">
                   <table className="table">
                     <thead>
                       <tr>
-                        <th style={{width: "10px"}}>#</th>
+                        <th style={{ width: "10px" }}>#</th>
                         <th>Token</th>
                         <th>Balance</th>
                       </tr>
@@ -41,21 +63,21 @@ const TotalBalanceCompoenent = () => {
                     <tbody>
                       {
                         list.length > 0 ?
-                        list.map((ele, index) => {
-                          return(<>
-                            <tr>
-                              <td>{index + 1}</td>
-                              <td>{ele.name}</td>
-                              <td>{ele.qty}</td>
-                            </tr>
-                          </>)
-                        }) :
-                        <><tr><td colSpan={3} className="text-center">No balance found.</td></tr></>
+                          list.map((ele, index) => {
+                            return (<>
+                              <tr>
+                                <td>{index + 1}</td>
+                                <td>{ele.name}</td>
+                                <td>{ele.qty}</td>
+                              </tr>
+                            </>)
+                          }) :
+                          <><tr><td colSpan={3} className="text-center">No balance found.</td></tr></>
                       }
                     </tbody>
                   </table>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
