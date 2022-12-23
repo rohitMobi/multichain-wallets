@@ -40,25 +40,25 @@ const AssetsCompoenent = () => {
           },
 
           buttons: [
-            {
-              extend: "pageLength",
-              className: "btn btn-sm btn-secondary bg-secondary",
-            },
-            {
-              extend: "csv",
-              className: "btn btn-sm btn-success bg-success",
-            },
-            {
-              extend: "print",
-              customize: function (win) {
-                $(win.document.body).css("font-size", "10pt");
-                $(win.document.body)
-                  .find("table")
-                  .addClass("compact")
-                  .css("font-size", "inherit");
-              },
-              className: "btn btn-sm btn-danger bg-danger",
-            },
+            // {
+            //   extend: "pageLength",
+            //   className: "btn btn-sm btn-secondary bg-secondary",
+            // },
+            // {
+            //   extend: "csv",
+            //   className: "btn btn-sm btn-success bg-success",
+            // },
+            // {
+            //   extend: "print",
+            //   customize: function (win) {
+            //     $(win.document.body).css("font-size", "10pt");
+            //     $(win.document.body)
+            //       .find("table")
+            //       .addClass("compact")
+            //       .css("font-size", "inherit");
+            //   },
+            //   className: "btn btn-sm btn-danger bg-danger",
+            // },
           ],
 
           fnRowCallback: function (
