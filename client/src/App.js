@@ -15,15 +15,29 @@ function App() {
     <>
       <Toaster position="bottom-center" />
       <NavbarComponents />
-      <div className='main-container'></div>
       <Routes>
-        <Route path='/' element={<DashboardCompoenent />} />
-        <Route path='/streams' element={<StreamsCompoenent />} />
-        <Route path='/transactions' element={<TransactionsCompoenent />} />
-        <Route path='/tokens' element={<AssetsCompoenent />} />
-        <Route path='/addresses' element={<AddressesCompoenent />} />
-        <Route path='/balance' element={<TotalBalanceCompoenent />} />
+        <Route path='/' element={<><DashboardCompoenent /> <div className='main-container'></div> </>} />
+        <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/tokens' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/addresses' element={<><AddressesCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/balance' element={<><TotalBalanceCompoenent /> <div className='main-container'></div></> } />
       </Routes>
+      <div class="footer__copyright" style={{ background: "transaparent" }}>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="footer__copyright__text text-white">
+                <p className='py-3'>
+                  © 2022 Mobiloitte
+                </p>
+              </div>
+            </div>
+            <div class="col-lg-4">
+            </div>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

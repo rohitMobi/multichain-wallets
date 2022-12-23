@@ -8,7 +8,7 @@ const { getDecodeAuth } = require("./services/data")
 router.get('/list-transactions', async(req, res) => {
     var payload = {
         "method" : "listwallettransactions",
-        "params" : [],
+        "params" : [100],
         "id" : 1,
         "chain_name" : "dexChain"
     };
