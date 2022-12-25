@@ -1,16 +1,15 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const base_url = "http://localhost:2762/";
 
-const { getDecodeAuth } = require("./services/data")
+const { getDecodeAuth, base_url, chain_name } = require("./services/data")
 
 router.get('/list-transactions', async(req, res) => {
     var payload = {
         "method" : "listwallettransactions",
         "params" : [100],
         "id" : 1,
-        "chain_name" : "dexChain"
+        "chain_name" : chain_name
     };
     const encodedToken = await getDecodeAuth();
     const result = await axios(`${base_url}`, {

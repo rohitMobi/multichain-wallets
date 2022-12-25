@@ -16,7 +16,7 @@ function App() {
       <Toaster position="bottom-center" />
       <NavbarComponents />
       <Routes>
-        <Route path='/' element={<><DashboardCompoenent /> <div className='main-container'></div> </>} />
+        <Route path='/' element={<><DashboardCompoenent /> </>} />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/tokens' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />

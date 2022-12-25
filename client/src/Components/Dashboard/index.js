@@ -1,21 +1,22 @@
 const DashboardCompoenent = () => {
   return (
     <>
-      <div className="text-center m-5 p-5">
-        <img
-          src="https://s2.coinmarketcap.com/static/img/coins/200x200/17050.png"
-          className="mb-5 animate__animated animate__zoomIn"
-        />
-        <h1 className="animate__animated animate__fadeIn animate__delay-1s text-white display-3 fs-bold">
-          Enterprise blockchain.<br></br>That actually works.
+      <div className="text-center m-5"  style={{paddingBottom: "13rem", paddingTop: "5rem", position: "relative"}}>
+        
+        <h1 className="text-white fs-bold">
+          Enterprise blockchain.That actually works.
         </h1>
+        <img
+          src="https://avatars.githubusercontent.com/u/15611443?s=280&v=4"
+          className="mb-5 imgMainDashboard"
+        />
       </div>
       <div
         class="row d-flex justify-content-center py-5"
         style={{ background: "#564bed" }}
       >
         <div class="col-lg-5 text-center">
-          <div class="section-title text-white animate__animated animate__fadeIn animate__delay-1s">
+          <div class="section-title text-white">
             <h4>
               MultiChain helps organizations to build and deploy blockchain
               applications with speed.

@@ -1,16 +1,15 @@
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const base_url = "http://localhost:2762/";
 
-const { getDecodeAuth } = require("./services/data")
+const { getDecodeAuth, base_url, chain_name } = require("./services/data")
 
 router.get('/list-addresses', async(req, res) => {
     var payload = {
         "method" : "listaddresses",
         "params" : [],
         "id" : 1,
-        "chain_name" : "dexChain"
+        "chain_name" : chain_name
     };
     const encodedToken = await getDecodeAuth();
     const result = await axios(`${base_url}`, {
@@ -32,7 +31,7 @@ router.post('/new-address', async(req, res) => {
         "method" : "getnewaddress",
         "params" : [],
         "id" : 1,
-        "chain_name" : "dexChain"
+        "chain_name" : chain_name
     };
     const encodedToken = await getDecodeAuth();
     const result = await axios(`${base_url}`, {
@@ -60,7 +59,7 @@ router.post('/grant-address', async(req, res) => {
         "method" : "grant",
         "params" : [address, type],
         "id" : 1,
-        "chain_name" : "dexChain"
+        "chain_name" : chain_name
     };
     const encodedToken = await getDecodeAuth();
     const result = await axios(`${base_url}`, {
