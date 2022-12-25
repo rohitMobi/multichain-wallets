@@ -1,6 +1,21 @@
 import { base_url } from "./baseurl";
 import axios from "axios";
 
+export const getInfo = async() => {
+    const res = await axios(`${base_url}get-info`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
 export const getAddresses = async() => {
     const res = await axios(`${base_url}addresses/list-addresses`, {
         method: 'get',

@@ -1,7 +1,7 @@
 const DashboardCompoenent = () => {
   return (
     <>
-      <div className="text-center m-5"  style={{paddingBottom: "13rem", paddingTop: "5rem", position: "relative"}}>
+      <div className="text-center m-5">
         
         <h1 className="text-white fs-bold">
           Enterprise blockchain.That actually works.

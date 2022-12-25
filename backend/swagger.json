@@ -91,6 +91,17 @@
             }
           }
         },
+        "/get-info": {
+          "get": {
+            "tags": ["Test"],
+            "summary": "Get Information",
+            "responses": {
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+        },
         "/streams/list-streams": {
             "get": {
                 "tags": ["Streams"],

@@ -147,14 +147,14 @@ const AssetsCompoenent = () => {
           <div className="container">
             <div className="row mb-2">
               <div className="col-sm-6">
-                <h1 className="m-0 text-white"> Tokens List</h1>
+                <h1 className="m-0 text-white"> Assets List</h1>
               </div>
               <div className="col-sm-6">
                 <button class="btn btn-primary btn-sm float-sm-right" onClick={() => setStatus(1)}>
-                  Create New Token
+                  Create New Asset
                 </button>
                 <button class="btn btn-primary btn-sm float-sm-right mr-2" onClick={() => setStatus(2)}>
-                  Token Transfer
+                  Assets Transfer
                 </button>
               </div>
             </div>
@@ -166,7 +166,7 @@ const AssetsCompoenent = () => {
                       <thead>
                         <tr>
                           <th style={{ width: "10px" }}>#</th>
-                          <th>Token Name</th>
+                          <th>Asset Name</th>
                           <th>Issue Trnsaction ID</th>
                           <th>Units</th>
                           <th>Quantity</th>
@@ -238,8 +238,8 @@ const AssetsCompoenent = () => {
               </div>
               <div className="col-sm-6">
                 <div class="form-group">
-                  <label className="text-white">Token Name</label>
-                  <input type="text" class="form-control" placeholder="Enter tokens name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                  <label className="text-white">Asset Name</label>
+                  <input type="text" class="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
                 </div>
               </div>
               <div className="col-sm-6">
@@ -272,7 +272,7 @@ const AssetsCompoenent = () => {
                         </>
                         :
                         <>
-                          Create Token
+                          Create Asset
                         </>
                       } 
                     </button>
@@ -290,7 +290,7 @@ const AssetsCompoenent = () => {
                         </>
                         :
                         <>
-                          Token Transfer
+                          Asset Transfer
                         </>
                       } 
                     </button>

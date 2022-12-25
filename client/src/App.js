@@ -9,6 +9,7 @@ import TransactionsCompoenent from './Components/Transactions';
 import AssetsCompoenent from './Components/Assets';
 import { Toaster } from 'react-hot-toast';
 import TotalBalanceCompoenent from './Components/Balance';
+import NodeCompoenent from './Components/Node';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <NavbarComponents />
       <Routes>
         <Route path='/' element={<><DashboardCompoenent /> </>} />
+        <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/tokens' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />

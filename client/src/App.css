@@ -1,20 +1,7 @@
 body{
-  font-family: "Poppins" !important;
+  font-family: 'Rubik';
   background: #010a1f;
-    /* background: linear-gradient(to right bottom, #141e30, #243b55); */
-    /* background: #243b55; */
 }
-
-/* .main-container{
-  position: absolute;
-  top: 0;
-  height: 100vh;
-  width: 100vw;
-  background: url("https://dexsport.io/img/9fca7669858edb5beed0.webp");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  z-index: 2;
-} */
 
 .main-container::after{
   content: "";
@@ -153,9 +140,11 @@ body{
 }
 
 .imgMainDashboard{
-  position: absolute;
-  z-index: -1;
-  bottom: -90%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 3rem;
+  height: 13rem;
+  transition: transform 1.5s ease-in-out;
+  cursor: pointer;
+}
+.imgMainDashboard:hover {
+  transform: rotate(360deg) !important;
 }
