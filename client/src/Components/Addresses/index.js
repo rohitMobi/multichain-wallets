@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { getAddresses, createAddresses } from "../../Services/api";
+import { Link } from "react-router-dom";
+import { getAddresses, createAddresses, getPermissions } from "../../Services/api";
 import toast from 'react-hot-toast';
 import $ from "jquery";
 
 const AddressesCompoenent = () => {
 
   const [list, setList] = useState([])
+  const [permission, setPermission] = useState([]);
   const [loader, setLoader] = useState(false)
 
   useEffect(() => {
@@ -14,8 +16,18 @@ const AddressesCompoenent = () => {
 
   const getList = async() => {
     const res = await getAddresses();
-    if(res.status === 200){
-      setList(res.data.data)
+    const permissions = await getPermissions();
+    if(res.status === 200 && permissions.status === 200){
+      setPermission(permissions.data.data)
+      var array = [];
+      if(res.data.data.length > 0){
+        res.data.data.forEach(async(element) => {
+          let permissionsList = await filterPermissions(element.address, permissions.data.data)
+          array.push({ ...element, permission: permissionsList })
+        });
+      }
+      setList(array)
+      console.log("permissions: ", permissions.data.data)
       dataTablesApply()
     }
   }
@@ -94,6 +106,13 @@ const AddressesCompoenent = () => {
     }
   }
 
+  const filterPermissions = async(address, array) => {
+    var result = array.filter((ele) => {
+      return ele.address === address
+    });
+    return result;
+  }
+
   return (
     <>
       <div className="content-header">
@@ -103,12 +122,12 @@ const AddressesCompoenent = () => {
               <h1 className="m-0 text-white"> Addresses List</h1>
             </div>
             <div className="col-sm-6">
-              <button class="btn btn-primary btn-sm float-sm-right" onClick={() => generateAddress()}>
+              <button className="btn btn-primary btn-sm float-sm-right" onClick={() => generateAddress()}>
                 {
                   loader === true ? 
                   <>
-                    <div class="spinner-border spinner-border-sm" role="status">
-                      <span class="visually-hidden"></span>
+                    <div className="spinner-border spinner-border-sm" role="status">
+                      <span className="visually-hidden"></span>
                     </div>
                   </>
                   :
@@ -128,7 +147,7 @@ const AddressesCompoenent = () => {
                       <tr>
                         <th style={{width: "10px"}}>#</th>
                         <th>Addresses</th>
-                        <th>Mine</th>
+                        <th style={{width: "50%"}}>Permission</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -139,7 +158,22 @@ const AddressesCompoenent = () => {
                             <tr>
                               <td>{index + 1}</td>
                               <td>{ele.address}</td>
-                              <td>{ele.ismine === true ? <><span class="badge badge-success">mine</span></> : "-"}</td>
+                              <td>
+                                {
+                                  ele.permission.length > 0 ?
+                                  ele.permission?.map((permission) =>{
+                                    return(
+                                      <>
+                                        <span className="badge badge-light mr-1">{permission.type}</span>
+                                      </>
+                                    )
+                                  })
+                                  :
+                                  "(none)"
+                                }
+                                - 
+                                <Link style={{textDecoration: "underline"}} to={`/change-permission?address=${ele.address}`}> change</Link>
+                              </td>
                             </tr>
                           </>)
                         }) :

@@ -33,15 +33,15 @@ const TotalBalanceCompoenent = () => {
                   list.length > 0 ?
                     list.map((ele, index) => {
                       return (<>
-                        <div class="col-lg-3 col-6">
-                          <div class="small-box bg-transparent-blue">
+                        <div className="col-lg-3 col-6">
+                          <div className="small-box bg-transparent-blue">
                             <div className="right-gold"></div>
-                            <div class="inner">
+                            <div className="inner">
                               <h3>{ele.qty}</h3>
                               <p>{ele.name}</p>
                             </div>
-                            <div class="icon">
-                              <i class="ion ion-bag"></i>
+                            <div className="icon">
+                              <i className="ion ion-bag"></i>
                             </div>
                           </div>
                         </div>

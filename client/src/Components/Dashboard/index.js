@@ -12,11 +12,11 @@ const DashboardCompoenent = () => {
         />
       </div>
       <div
-        class="row d-flex justify-content-center py-5"
+        className="row d-flex justify-content-center py-5"
         style={{ background: "#564bed" }}
       >
-        <div class="col-lg-5 text-center">
-          <div class="section-title text-white">
+        <div className="col-lg-5 text-center">
+          <div className="section-title text-white">
             <h4>
               MultiChain helps organizations to build and deploy blockchain
               applications with speed.
@@ -29,19 +29,19 @@ const DashboardCompoenent = () => {
           <div className="col-lg-12 p-5">
             <div className="card transparent-card-primary">
               <div className="card-body">
-                <div class="row">
-                  <div class="col-lg-6 text-center p-4">
-                    <div class="users__pic">
+                <div className="row">
+                  <div className="col-lg-6 text-center p-4">
+                    <div className="users__pic">
                       <img
                         src="https://www.multichain.com/assets/rapid-icon.png"
                         data-ll-status="loaded"
-                        class="entered lazyloaded"
+                        className="entered lazyloaded"
                       />
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="users__text pt-5">
-                      <div class="users__text__title">
+                  <div className="col-lg-6">
+                    <div className="users__text pt-5">
+                      <div className="users__text__title">
                         <h2>Rapid deployment</h2>
                         <hr
                           style={{
@@ -66,10 +66,10 @@ const DashboardCompoenent = () => {
           <div className="col-lg-12 p-5">
             <div className="card transparent-card-primary">
               <div className="card-body">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="users__text pt-5">
-                      <div class="users__text__title">
+                <div className="row">
+                  <div className="col-lg-6">
+                    <div className="users__text pt-5">
+                      <div className="users__text__title">
                         <h2>Unlimited assets</h2>
                         <hr
                           style={{
@@ -88,12 +88,12 @@ const DashboardCompoenent = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 text-center p-4">
-                    <div class="users__pic">
+                  <div className="col-lg-6 text-center p-4">
+                    <div className="users__pic">
                       <img
                         src="https://www.multichain.com/assets/asset-icon.png"
                         data-ll-status="loaded"
-                        class="entered lazyloaded"
+                        className="entered lazyloaded"
                       />
                     </div>
                   </div>
@@ -105,19 +105,19 @@ const DashboardCompoenent = () => {
           <div className="col-lg-12 p-5">
             <div className="card transparent-card-primary">
               <div className="card-body">
-                <div class="row">
-                  <div class="col-lg-6 text-center p-4">
-                    <div class="users__pic">
+                <div className="row">
+                  <div className="col-lg-6 text-center p-4">
+                    <div className="users__pic">
                       <img
                         src="https://www.multichain.com/assets/stream-icon.png"
                         data-ll-status="loaded"
-                        class="entered lazyloaded"
+                        className="entered lazyloaded"
                       />
                     </div>
                   </div>
-                  <div class="col-lg-6">
-                    <div class="users__text pt-5">
-                      <div class="users__text__title">
+                  <div className="col-lg-6">
+                    <div className="users__text pt-5">
+                      <div className="users__text__title">
                         <h2>Data streams</h2>
                         <hr
                           style={{
@@ -142,10 +142,10 @@ const DashboardCompoenent = () => {
           <div className="col-lg-12 p-5">
             <div className="card transparent-card-primary">
               <div className="card-body">
-                <div class="row">
-                  <div class="col-lg-6">
-                    <div class="users__text pt-5">
-                      <div class="users__text__title">
+                <div className="row">
+                  <div className="col-lg-6">
+                    <div className="users__text pt-5">
+                      <div className="users__text__title">
                         <h2>Fine-grained permissions</h2>
                         <hr
                           style={{
@@ -163,12 +163,12 @@ const DashboardCompoenent = () => {
                       </div>
                     </div>
                   </div>
-                  <div class="col-lg-6 text-center p-4">
-                    <div class="users__pic">
+                  <div className="col-lg-6 text-center p-4">
+                    <div className="users__pic">
                       <img
                         src="https://www.multichain.com/assets/permission-icon.png"
                         data-ll-status="loaded"
-                        class="entered lazyloaded"
+                        className="entered lazyloaded"
                       />
                     </div>
                   </div>

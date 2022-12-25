@@ -48,15 +48,15 @@ router.post('/new-address', async(req, res) => {
     });
 });
 
-router.post('/grant-address', async(req, res) => {
-    const { address, type } = req.body;
+router.post('/change-permission-address', async(req, res) => {
+    const { grant_revoke, address, type } = req.body;
 
-    if(!address || !type){
-        return res.status(500).send({ status: "error", message: "Please provide address & permission" })
+    if(!grant_revoke || !address || !type){
+        return res.status(500).send({ status: "error", message: "Please provide grant or revoke, address & permission type" })
     }
 
     var payload = {
-        "method" : "grant",
+        "method" : grant_revoke,
         "params" : [address, type],
         "id" : 1,
         "chain_name" : chain_name
@@ -70,7 +70,7 @@ router.post('/grant-address', async(req, res) => {
         },
         data: payload,
     }).then((result) => {
-        return res.status(200).send({ status: "success", message: "New Addresses Successfully 😀", data: result.data.result })
+        return res.status(200).send({ status: "success", message: "Change the permission 😀", data: result.data.result })
     }).catch((err) => {
         return err.response;
     });

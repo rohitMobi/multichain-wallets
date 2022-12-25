@@ -16,6 +16,38 @@ export const getInfo = async() => {
     return res;
 }
 
+export const getPermissions = async() => {
+    const res = await axios(`${base_url}permissions/list-permissions`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
+export const changePermissionAddress = async(grant_revoke, address, type) => {
+    var payload = { grant_revoke: grant_revoke, address: address, type: type }
+    const res = await axios(`${base_url}addresses/change-permission-address`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
 export const getAddresses = async() => {
     const res = await axios(`${base_url}addresses/list-addresses`, {
         method: 'get',

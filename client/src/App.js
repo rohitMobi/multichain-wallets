@@ -10,6 +10,7 @@ import AssetsCompoenent from './Components/Assets';
 import { Toaster } from 'react-hot-toast';
 import TotalBalanceCompoenent from './Components/Balance';
 import NodeCompoenent from './Components/Node';
+import ChangePermissionCompoenent from './Components/ChangePermission';
 
 function App() {
   return (
@@ -20,22 +21,23 @@ function App() {
         <Route path='/' element={<><DashboardCompoenent /> </>} />
         <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/change-permission' element={<><ChangePermissionCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
-        <Route path='/tokens' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/assets' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/addresses' element={<><AddressesCompoenent /> <div className='main-container'></div></> } />
         <Route path='/balance' element={<><TotalBalanceCompoenent /> <div className='main-container'></div></> } />
       </Routes>
-      <div class="footer__copyright" style={{ background: "transaparent" }}>
-        <div class="container">
-          <div class="row">
-            <div class="col-lg-8">
-              <div class="footer__copyright__text text-white">
+      <div className="footer__copyright" style={{ background: "transaparent" }}>
+        <div className="container">
+          <div className="row">
+            <div className="col-lg-8">
+              <div className="footer__copyright__text text-white">
                 <p className='py-3'>
                   © 2022 Mobiloitte
                 </p>
               </div>
             </div>
-            <div class="col-lg-4">
+            <div className="col-lg-4">
             </div>
           </div>
         </div>

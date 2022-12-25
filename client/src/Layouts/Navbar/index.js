@@ -37,8 +37,8 @@ const NavbarComponents = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link to="/tokens" className={ window.location.pathname === "/tokens" ? "nav-link link-active" : "nav-link"}>
-                      Tokens
+                    <Link to="/assets" className={ window.location.pathname === "/tokens" ? "nav-link link-active" : "nav-link"}>
+                      Assets
                     </Link>
                   </li>
                   <li className="nav-item">

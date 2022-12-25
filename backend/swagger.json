@@ -24,6 +24,9 @@
       "GrantAccess": {
         "required": ["address", "type"],
         "properties": {
+          "grant_revoke": {
+            "type": "string"
+          },
           "address": {
             "type": "string"
           },
@@ -32,6 +35,7 @@
           }
         },
         "example": {
+          "grant_revoke": "grant",
           "address": "1GhnrnZhMwtSFetWETKoRzsJ9hzrQ4Jj1n7f1R",
           "type": "issue"
         }
@@ -210,7 +214,7 @@
                 }
             }
         },
-        "/addresses/grant-address": {
+        "/addresses/change-permission-address": {
             "post": {
                 "tags": ["Addresses"],
                 "summary": "Change Permission of the address",

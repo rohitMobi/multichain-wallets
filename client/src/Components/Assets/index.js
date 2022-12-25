@@ -150,10 +150,10 @@ const AssetsCompoenent = () => {
                 <h1 className="m-0 text-white"> Assets List</h1>
               </div>
               <div className="col-sm-6">
-                <button class="btn btn-primary btn-sm float-sm-right" onClick={() => setStatus(1)}>
+                <button className="btn btn-primary btn-sm float-sm-right" onClick={() => setStatus(1)}>
                   Create New Asset
                 </button>
-                <button class="btn btn-primary btn-sm float-sm-right mr-2" onClick={() => setStatus(2)}>
+                <button className="btn btn-primary btn-sm float-sm-right mr-2" onClick={() => setStatus(2)}>
                   Assets Transfer
                 </button>
               </div>
@@ -224,37 +224,37 @@ const AssetsCompoenent = () => {
                 <h1 className="m-0 text-white"> { status === 1 && "Create token" } { status === 2 && "Token Transfer" } </h1>
               </div>
               <div className="col-sm-6">
-                <button class="btn btn-warning btn-sm float-sm-right" onClick={() => clearFields()}>
+                <button className="btn btn-warning btn-sm float-sm-right" onClick={() => clearFields()}>
                   Back
                 </button>
               </div>
             </div>
             <div className="row mb-2">
               <div className="col-sm-6">
-                <div class="form-group">
+                <div className="form-group">
                   <label className="text-white">Address</label>
-                  <input type="text" class="form-control" placeholder="Enter address" onChange={(e) => { setAddress(e.target.value) }} />
+                  <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setAddress(e.target.value) }} />
                 </div>
               </div>
               <div className="col-sm-6">
-                <div class="form-group">
+                <div className="form-group">
                   <label className="text-white">Asset Name</label>
-                  <input type="text" class="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                  <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
                 </div>
               </div>
               <div className="col-sm-6">
-                <div class="form-group">
+                <div className="form-group">
                   <label className="text-white">Quantity</label>
-                  <input type="number" class="form-control" placeholder="Enter quantity" onChange={(e) => { setQuantity(e.target.value) }} />
+                  <input type="number" className="form-control" placeholder="Enter quantity" onChange={(e) => { setQuantity(e.target.value) }} />
                 </div>
               </div>
               {
                 status === 1 && 
                 <>
                   <div className="col-sm-6">
-                    <div class="form-group">
+                    <div className="form-group">
                       <label className="text-white">Smallest Unit</label>
-                      <input type="number" class="form-control" placeholder="Enter smallest unit" onChange={(e) => { setSmallestUnit(e.target.value) }} />
+                      <input type="number" className="form-control" placeholder="Enter smallest unit" onChange={(e) => { setSmallestUnit(e.target.value) }} />
                     </div>
                   </div>
                 </>
@@ -262,12 +262,12 @@ const AssetsCompoenent = () => {
               <div className="col-sm-12">
                 {
                   status === 1 && <>
-                    <button class="btn btn-primary btn-sm float-sm-right" onClick={() => createAssetSNew()}>
+                    <button className="btn btn-primary btn-sm float-sm-right" onClick={() => createAssetSNew()}>
                       {
                         loader === true ? 
                         <>
-                          <div class="spinner-border spinner-border-sm" role="status">
-                            <span class="visually-hidden"></span>
+                          <div className="spinner-border spinner-border-sm" role="status">
+                            <span className="visually-hidden"></span>
                           </div>
                         </>
                         :
@@ -280,12 +280,12 @@ const AssetsCompoenent = () => {
                 }
                 {
                   status === 2 && <>
-                    <button class="btn btn-primary btn-sm float-sm-right" onClick={() => transferTokenNew()}>
+                    <button className="btn btn-primary btn-sm float-sm-right" onClick={() => transferTokenNew()}>
                       {
                         loader === true ? 
                         <>
-                          <div class="spinner-border spinner-border-sm" role="status">
-                            <span class="visually-hidden"></span>
+                          <div className="spinner-border spinner-border-sm" role="status">
+                            <span className="visually-hidden"></span>
                           </div>
                         </>
                         :

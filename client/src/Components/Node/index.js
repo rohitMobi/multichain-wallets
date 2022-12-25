@@ -29,7 +29,7 @@ const NodeCompoenent = () => {
             <div className="col-md-12">
               <div className="row">
                 <div className="offset-lg-3 col-lg-6">
-                  <div class="card bg-transparent-blue">
+                  <div className="card bg-transparent-blue">
                     <div className="right-gold"></div>
                     <table className="table table-borderless">
                       <tbody>
