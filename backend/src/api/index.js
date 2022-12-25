@@ -33,6 +33,7 @@ router.get('/get-info', async(req, res) => {
 });
 
 router.use('/streams', require("./streams"));
+router.use('/permissions', require("./permissions"));
 router.use('/transactions', require("./transactions"));
 router.use('/addresses', require("./addresses"));
 router.use('/assets', require("./assets"));

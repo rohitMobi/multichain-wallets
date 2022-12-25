@@ -102,10 +102,10 @@
             }
           }
         },
-        "/streams/list-streams": {
+        "/permissions/list-permissions": {
             "get": {
-                "tags": ["Streams"],
-                "summary": "List of all streams",
+                "tags": ["Permissions"],
+                "summary": "List of all permissions",
                 "responses": {
                   "200": {
                     "description": "OK"
@@ -113,6 +113,17 @@
                 }
             }
         },
+        "/streams/list-streams": {
+          "get": {
+              "tags": ["Streams"],
+              "summary": "List of all streams",
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+      },
         "/assets/list-assets": {
             "get": {
                 "tags": ["Assets"],
