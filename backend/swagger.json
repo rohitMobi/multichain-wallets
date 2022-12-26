@@ -81,6 +81,17 @@
           "assetsName": "ZTK",
           "quantity": "50"
         }
+      },
+      "CreateStream": {
+        "required": ["name"],
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "name": "Stream1"
+        }
       }
     },
     "paths": {
@@ -143,6 +154,27 @@
           "get": {
               "tags": ["Assets"],
               "summary": "List of all get total balances",
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
+        "/streams/create-stream": {
+          "post": {
+              "tags": ["Streams"],
+              "summary": "Create new stream",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "name is required",
+                  "schema": {
+                    "$ref": "#/definitions/CreateStream"
+                  }
+                }
+              ],
               "responses": {
                 "200": {
                   "description": "OK"
