@@ -17,7 +17,9 @@ const TotalBalanceCompoenent = () => {
       for (const obj in res.data.data) {
         if (Object.hasOwnProperty.call(res.data.data, obj)) {
             const element = res.data.data[obj];
-            array.push({...element[0], account: obj})
+            element.forEach((ele) => {
+              array.push({...ele, account: obj})
+            });
         }
       }
       setList(array)
@@ -42,7 +44,7 @@ const TotalBalanceCompoenent = () => {
               <div className="row">
                 {
                   list.length > 0 ?
-                    list.map((ele, index) => {
+                    list.filter((ele) => { return ele.account !== "total" }).map((ele, index) => {
                       return (<>
                         <div className="col-lg-3 col-6">
                           <div className="small-box bg-transparent-blue">
@@ -61,34 +63,37 @@ const TotalBalanceCompoenent = () => {
                     <><div className="col-lg-12 text-center text-white">No balance found</div></>
                 }
               </div>
-              {/* <div className="card transparent-card">
-                <div className="card-body p-0">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th style={{ width: "10px" }}>#</th>
-                        <th>Token</th>
-                        <th>Balance</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        list.length > 0 ?
-                          list.map((ele, index) => {
-                            return (<>
-                              <tr>
-                                <td>{index + 1}</td>
-                                <td>{ele.name}</td>
-                                <td>{ele.qty}</td>
-                              </tr>
-                            </>)
-                          }) :
-                          <><tr><td colSpan={3} className="text-center">No balance found.</td></tr></>
-                      }
-                    </tbody>
-                  </table>
-                </div>
-              </div> */}
+            </div>
+          </div>
+          <div className="row mb-2">
+            <div className="col-sm-6">
+              <h1 className="m-0 text-white"> Total Balances </h1>
+            </div>
+          </div>
+          <div className="row mt-3">
+            <div className="col-md-12">
+              <div className="row">
+                {
+                  list.length > 0 ?
+                    list.filter((ele) => { return ele.account === "total" }).map((ele, index) => {
+                      return (<>
+                        <div className="col-lg-3 col-6">
+                          <div className="small-box bg-transparent-blue">
+                            <div className="right-gold"></div>
+                            <div className="inner">
+                              <h3>{ele.qty} <span style={{fontSize: "small"}}>{ele.name}</span></h3>
+                              <p>{ ele.account === "total" ? "Total" : changeAddressFormat(ele.account)}</p>
+                            </div>
+                            <div className="icon">
+                              <i className="ion ion-bag"></i>
+                            </div>
+                          </div>
+                        </div>
+                      </>)
+                    }) :
+                    <><div className="col-lg-12 text-center text-white">No balance found</div></>
+                }
+              </div>
             </div>
           </div>
         </div>
