@@ -16,6 +16,21 @@ export const getInfo = async() => {
     return res;
 }
 
+export const listAtreams = async() => {
+    const res = await axios(`${base_url}streams/list-streams`, {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
 export const getPermissions = async() => {
     const res = await axios(`${base_url}permissions/list-permissions`, {
         method: 'get',
