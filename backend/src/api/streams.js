@@ -51,4 +51,29 @@ router.post('/create-stream', async(req, res) => {
     });
 });
 
+router.post('/subscribe-stream', async(req, res) => {
+    const { name } = req.body;
+
+    var payload = {
+        "method" : "subscribe",
+        "params" : [name],
+        "id" : 1,
+        "chain_name" : chain_name
+    };
+    
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "Subscribe Stream Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
 module.exports = router;

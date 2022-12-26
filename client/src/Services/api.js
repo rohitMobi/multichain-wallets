@@ -63,6 +63,23 @@ export const createStream = async(name) => {
     return res;
 }
 
+export const subscribeStream = async(name) => {
+    var payload = { name: name }
+    const res = await axios(`${base_url}streams/subscribe-stream`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
 export const changePermissionAddress = async(grant_revoke, address, type) => {
     var payload = { grant_revoke: grant_revoke, address: address, type: type }
     const res = await axios(`${base_url}addresses/change-permission-address`, {

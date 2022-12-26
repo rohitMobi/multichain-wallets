@@ -182,6 +182,27 @@
               }
           }
         },
+        "/streams/subscribe-stream": {
+          "post": {
+              "tags": ["Streams"],
+              "summary": "Subscribe new stream",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "name is required",
+                  "schema": {
+                    "$ref": "#/definitions/CreateStream"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
         "/assets/create-assets": {
           "post": {
               "tags": ["Assets"],
