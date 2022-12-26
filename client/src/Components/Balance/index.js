@@ -13,8 +13,19 @@ const TotalBalanceCompoenent = () => {
   const getList = async () => {
     const res = await gettotalbalances();
     if (res.status === 200) {
-      setList(res.data.data)
+      var array = [];
+      for (const obj in res.data.data) {
+        if (Object.hasOwnProperty.call(res.data.data, obj)) {
+            const element = res.data.data[obj];
+            array.push({...element[0], account: obj})
+        }
+      }
+      setList(array)
     }
+  }
+
+  const changeAddressFormat = (ele) => {
+    return ( (ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
   }
 
   return (
@@ -23,7 +34,7 @@ const TotalBalanceCompoenent = () => {
         <div className="container">
           <div className="row mb-2">
             <div className="col-sm-6">
-              <h1 className="m-0 text-white"> Total Balance List </h1>
+              <h1 className="m-0 text-white"> Available Balances </h1>
             </div>
           </div>
           <div className="row mt-3">
@@ -37,8 +48,8 @@ const TotalBalanceCompoenent = () => {
                           <div className="small-box bg-transparent-blue">
                             <div className="right-gold"></div>
                             <div className="inner">
-                              <h3>{ele.qty}</h3>
-                              <p>{ele.name}</p>
+                              <h3>{ele.qty} <span style={{fontSize: "small"}}>{ele.name}</span></h3>
+                              <p>{ ele.account === "total" ? "Total" : changeAddressFormat(ele.account)}</p>
                             </div>
                             <div className="icon">
                               <i className="ion ion-bag"></i>

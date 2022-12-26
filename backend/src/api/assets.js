@@ -28,7 +28,7 @@ router.get('/list-assets', async(req, res) => {
 
 router.get('/list-gettotalbalances', async(req, res) => {
     var payload = {
-        "method" : "gettotalbalances",
+        "method" : "getmultibalances",
         "params" : [],
         "id" : 1,
         "chain_name" : chain_name
