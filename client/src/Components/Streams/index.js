@@ -141,7 +141,7 @@ const StreamsCompoenent = () => {
                           <th style={{ width: "10px" }}>#</th>
                           <th>Name</th>
                           <th>Create Txid</th>
-                          <th>Items</th>
+                          <th>Subscribe Status</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -153,7 +153,7 @@ const StreamsCompoenent = () => {
                                   <td>{index + 1}</td>
                                   <td>{ele.name}</td>
                                   <td>{changeAddressFormat(ele.createtxid)}</td>
-                                  <td>{ele.items ? ele.items : "Not Subscribed"}</td>
+                                  <td>{ele.subscribed === true ? <span className="badge badge-light mr-1">Subscribed</span> : "Not Subscribed"}</td>
                                 </tr>
                               </>)
                             })
