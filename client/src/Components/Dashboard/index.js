@@ -13,10 +13,10 @@ const DashboardCompoenent = () => {
       </div>
       <div
         className="row d-flex justify-content-center py-5"
-        style={{ background: "#564bed" }}
+        // style={{ background: "#564bed" }}
       >
         <div className="col-lg-5 text-center">
-          <div className="section-title text-white">
+          <div className="section-title text-white mt-5">
             <h4>
               MultiChain helps organizations to build and deploy blockchain
               applications with speed.

@@ -31,10 +31,11 @@ function App() {
         </> )
       }
       <Routes>
+        <Route path='/' element={<Navigate to="/home" />} />
         <Route path='/home' element={<><DashboardCompoenent /> </>} />
         <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
-        <Route path='/view-streams' element={<><ViewStreamsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/view-stream' element={<><ViewStreamsCompoenent /></> } />
         <Route path='/change-permission' element={<><ChangePermissionCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/assets' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />

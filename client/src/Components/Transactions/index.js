@@ -87,6 +87,11 @@ const TransactionsCompoenent = () => {
     return ( (ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
   }
 
+  const convertDate = (long) => {
+    var date = new Date(Math.floor(long * 1000))
+    return date;
+  }
+
     return (
       <>
         <div className="content-header">
@@ -108,7 +113,7 @@ const TransactionsCompoenent = () => {
                           <th>To address</th>
                           <th>Block Hash</th>
                           <th>Transaction Id</th>
-                          {/* <th>Date & Time</th> */}
+                          <th style={{width: "20%"}}>Date & Time</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -122,7 +127,7 @@ const TransactionsCompoenent = () => {
                                 <td>{changeAddressFormat(ele.addresses[0])}</td>
                                 <td>{changeAddressFormat(ele.blockhash)}</td>
                                 <td>{changeAddressFormat(ele.txid)}</td>
-                                {/* <td>{ele.time} {format(new Date(ele.time), 'dd/MM/yyyy')}</td> */}
+                                <td>{format(convertDate(ele.time), 'dd MMM, yyyy hh:mm a')}</td>
                               </tr>
                             </>)
                           })
