@@ -33,6 +33,10 @@ const ViewStreamsCompoenent = () => {
     return date;
   }
 
+  const isEmpty = (ele) => {
+    return (ele != null && ele != undefined && ele != "")
+  }
+
   return (
     <>
       <div className="content-header">
@@ -41,6 +45,13 @@ const ViewStreamsCompoenent = () => {
             <div className="col-sm-6">
               <h1 className="m-0 text-white"> Stream Items List</h1>
             </div>
+              <div className="col-sm-6">
+                  <Link to="/streams">
+                    <button className="btn btn-outline-warning btn-sm float-sm-right">
+                        Back
+                    </button>
+                  </Link>
+              </div>
           </div>
           <div className="row mt-3">
             <div className="col-md-12">
@@ -71,7 +82,7 @@ const ViewStreamsCompoenent = () => {
                                     </tr>
                                     <tr>
                                       <th>Added</th>
-                                      <td>{format(convertDate(ele.blocktime), 'dd MMMM, yyyy hh:mm a')}</td>
+                                      <td>{ isEmpty(ele.blocktime) ? format(convertDate(ele.blocktime), 'dd MMMM, yyyy hh:mm a') : "-"}</td>
                                     </tr>
                                   </tbody>
                                 </table>

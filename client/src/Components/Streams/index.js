@@ -171,10 +171,11 @@ const StreamsCompoenent = () => {
                                   <td>{ele.name}</td>
                                   <td>{changeAddressFormat(ele.createtxid)}</td>
                                   <td>{ele.subscribed === true ? <span className="badge badge-light mr-1">Subscribed</span> : 
-                                    <>Not Subscribed - <button className="btn btn-sm btn-primary" onClick={() => subscribeStreamsAction(ele.name)}>Click to subscribed</button></>
+                                    <>Not Subscribed - <button className="btn btn-xs rounded-3 btn-outline-danger" onClick={() => subscribeStreamsAction(ele.name)}>Click to subscribed</button></>
                                   }</td>
                                     <td>
-                                      <Link to={`/view-stream?name=${ele.name}`}><button className="btn btn-sm btn-primary">view</button></Link>
+                                      <Link to={`/view-stream?name=${ele.name}`}><button className="btn btn-xs rounded-3 btn-outline-success mr-2">view</button></Link>
+                                      <Link to={`/publish-stream?name=${ele.name}`}><button className="btn btn-xs rounded-3 btn-outline-warning">publish</button></Link>
                                     </td>
                                 </tr>
                               </>)

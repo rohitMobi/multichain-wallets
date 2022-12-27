@@ -14,6 +14,7 @@ import TotalBalanceCompoenent from './Components/Balance';
 import NodeCompoenent from './Components/Node';
 import ChangePermissionCompoenent from './Components/ChangePermission';
 import ViewStreamsCompoenent from './Components/Streams/ViewSteams';
+import PublishStreamCompoenent from './Components/Streams/PublishStream';
 
 function App() {
   
@@ -36,6 +37,7 @@ function App() {
         <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/view-stream' element={<><ViewStreamsCompoenent /></> } />
+        <Route path='/publish-stream' element={<><PublishStreamCompoenent /></> } />
         <Route path='/change-permission' element={<><ChangePermissionCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/assets' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />

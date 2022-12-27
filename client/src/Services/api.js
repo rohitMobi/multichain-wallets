@@ -98,8 +98,9 @@ export const listStreamItems = async(name) => {
 }
 
 export const publishStreamItems = async(name, key, value) => {
-    var payload = { name: name, key: key, value: value, }
-    const res = await axios(`${base_url}streams/list-stream-items`, {
+    var payload = { name: name, key: key, value: { "json" : value } }
+    console.log("payload: ", payload);
+    const res = await axios(`${base_url}streams/publish-stream-item`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
