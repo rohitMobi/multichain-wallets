@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 import TotalBalanceCompoenent from './Components/Balance';
 import NodeCompoenent from './Components/Node';
 import ChangePermissionCompoenent from './Components/ChangePermission';
+import ViewStreamsCompoenent from './Components/Streams/ViewSteams';
 
 function App() {
   
@@ -33,6 +34,7 @@ function App() {
         <Route path='/home' element={<><DashboardCompoenent /> </>} />
         <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/view-streams' element={<><ViewStreamsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/change-permission' element={<><ChangePermissionCompoenent /> <div className='main-container'></div></> } />
         <Route path='/transactions' element={<><TransactionsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/assets' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />

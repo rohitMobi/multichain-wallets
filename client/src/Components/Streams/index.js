@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { listAtreams, createStream, subscribeStream } from "../../Services/api";
 import toast from 'react-hot-toast';
 import $ from "jquery";
@@ -157,6 +158,7 @@ const StreamsCompoenent = () => {
                           <th>Name</th>
                           <th>Create Txid</th>
                           <th>Subscribe Status</th>
+                          <th>Action</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -171,6 +173,9 @@ const StreamsCompoenent = () => {
                                   <td>{ele.subscribed === true ? <span className="badge badge-light mr-1">Subscribed</span> : 
                                     <>Not Subscribed - <button className="btn btn-sm btn-primary" onClick={() => subscribeStreamsAction(ele.name)}>Click to subscribed</button></>
                                   }</td>
+                                    <td>
+                                      <Link to={`/view-stream?name=${ele.name}`}><button className="btn btn-sm btn-primary">view</button></Link>
+                                    </td>
                                 </tr>
                               </>)
                             })

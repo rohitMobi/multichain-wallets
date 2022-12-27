@@ -80,6 +80,40 @@ export const subscribeStream = async(name) => {
     return res;
 }
 
+export const listStreamItems = async(name) => {
+    var payload = { name: name }
+    const res = await axios(`${base_url}streams/list-stream-items`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
+export const publishStreamItems = async(name, key, value) => {
+    var payload = { name: name, key: key, value: value, }
+    const res = await axios(`${base_url}streams/list-stream-items`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
 export const changePermissionAddress = async(grant_revoke, address, type) => {
     var payload = { grant_revoke: grant_revoke, address: address, type: type }
     const res = await axios(`${base_url}addresses/change-permission-address`, {
