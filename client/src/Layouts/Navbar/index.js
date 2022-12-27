@@ -14,7 +14,7 @@ const NavbarComponents = () => {
         <div className="wrapper">
           <nav className="main-header navbar navbar-expand-md navbar-dark navbar-dark border-0 p-3" style={{marginLeft: "unset", background: "transparent"}}>
             <div className="container">
-              <Link to="/" className="navbar-brand">
+              <Link to="/home" className="navbar-brand">
                 <img src="https://avatars.githubusercontent.com/u/15611443?s=280&v=4" alt="AdminLTE Logo" className="brand-image img-circle elevation-3 mr-2" style={{opacity: "0.8", height: "1.8rem"}} />
                 <span className="brand-text font-weight-light">Multichain</span>
               </Link>

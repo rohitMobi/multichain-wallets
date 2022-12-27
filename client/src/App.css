@@ -151,3 +151,12 @@ body{
   border-bottom: solid 1px rgb(255, 193, 7);
   transform: rotate(360deg) !important;
 }
+
+.main-video{
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: -1;
+  -webkit-mask-image: linear-gradient(black, transparent);
+  mask-image: linear-gradient(black, transparent);
+}

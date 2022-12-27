@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { listAtreams, createStream } from "../../Services/api";
+import { listAtreams, createStream, subscribeStream } from "../../Services/api";
 import toast from 'react-hot-toast';
 import $ from "jquery";
 
@@ -114,6 +114,21 @@ const StreamsCompoenent = () => {
       toast.success("New Stream Genarate Successfully.")
     }
   }
+  
+  const subscribeStreamsAction = async (name) => {
+    if (!name) {
+      toast.error("All fields mendatory.")
+      setLoader(false);
+    }
+
+    const res = await subscribeStream(name);
+    if (res.status === 200) {
+      $("#streamsTableDT").DataTable().destroy()
+      getList();
+      clearFields();
+      toast.success("Subscribe Stream Successfully.")
+    }
+  }
 
   const getStreamList = () => {
     return (
@@ -153,7 +168,9 @@ const StreamsCompoenent = () => {
                                   <td>{index + 1}</td>
                                   <td>{ele.name}</td>
                                   <td>{changeAddressFormat(ele.createtxid)}</td>
-                                  <td>{ele.subscribed === true ? <span className="badge badge-light mr-1">Subscribed</span> : "Not Subscribed"}</td>
+                                  <td>{ele.subscribed === true ? <span className="badge badge-light mr-1">Subscribed</span> : 
+                                    <>Not Subscribed - <button className="btn btn-sm btn-primary" onClick={() => subscribeStreamsAction(ele.name)}>Click to subscribed</button></>
+                                  }</td>
                                 </tr>
                               </>)
                             })

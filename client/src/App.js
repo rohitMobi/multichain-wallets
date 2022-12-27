@@ -1,6 +1,8 @@
 import logo from './logo.svg';
+import Bitcoin from "./Assets/bitcoin.mp4";
+import Bg from "./Assets/bg.mp4";
 import './App.css';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import NavbarComponents from './Layouts/Navbar';
 import AddressesCompoenent from "./Components/Addresses/index";
 import DashboardCompoenent from './Components/Dashboard';
@@ -13,12 +15,22 @@ import NodeCompoenent from './Components/Node';
 import ChangePermissionCompoenent from './Components/ChangePermission';
 
 function App() {
+  
+  const location = useLocation();
+
   return (
     <>
       <Toaster position="bottom-center" />
       <NavbarComponents />
+      {
+        (location.pathname === "/home" && <>
+          <video className='videoTag main-video' autoPlay loop muted>
+            <source src={Bg} type='video/mp4' />
+          </video> 
+        </> )
+      }
       <Routes>
-        <Route path='/' element={<><DashboardCompoenent /> </>} />
+        <Route path='/home' element={<><DashboardCompoenent /> </>} />
         <Route path='/node' element={<><NodeCompoenent /> <div className='main-container'></div></> } />
         <Route path='/streams' element={<><StreamsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/change-permission' element={<><ChangePermissionCompoenent /> <div className='main-container'></div></> } />
