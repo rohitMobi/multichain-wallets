@@ -76,4 +76,54 @@ router.post('/subscribe-stream', async(req, res) => {
     });
 });
 
+router.post('/list-stream-items', async(req, res) => {
+    const { name } = req.body;
+
+    var payload = {
+        "method" : "liststreamitems",
+        "params" : [name],
+        "id" : 1,
+        "chain_name" : chain_name
+    };
+    
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "Stream Items Get Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
+router.post('/publish-stream-item', async(req, res) => {
+    const { name, key, value } = req.body;
+
+    var payload = {
+        "method" : "publish",
+        "params" : [name, key, value],
+        "id" : 1,
+        "chain_name" : chain_name
+    };
+    
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "Stream Items Get Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
 module.exports = router;

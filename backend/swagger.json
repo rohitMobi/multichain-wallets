@@ -40,6 +40,27 @@
           "type": "issue"
         }
       },
+      "PublishItem": {
+        "required": ["name", "key", "value"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "key": {
+            "type": "string"
+          },
+          "value": {
+            "type": "object"
+          }
+        },
+        "example": {
+          "name": "Stream1",
+          "key": "Section Name",
+          "value": {
+            "json": { "name" : "Computer" } 
+          }
+        }
+      },
       "CreateAssets": {
         "required": ["address", "assetsName", "quantity", "smallestUnit"],
         "properties": {
@@ -193,6 +214,48 @@
                   "description": "name is required",
                   "schema": {
                     "$ref": "#/definitions/CreateStream"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
+        "/streams/list-stream-items": {
+          "post": {
+              "tags": ["Streams"],
+              "summary": "Get stream items list",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "name is required",
+                  "schema": {
+                    "$ref": "#/definitions/CreateStream"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
+        "/streams/publish-stream-item": {
+          "post": {
+              "tags": ["Streams"],
+              "summary": "Publish stream item",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "name, key, value is required",
+                  "schema": {
+                    "$ref": "#/definitions/PublishItem"
                   }
                 }
               ],
