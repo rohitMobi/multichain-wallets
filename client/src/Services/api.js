@@ -213,7 +213,7 @@ export const createAssets = async(address, assetsName, quantity, smallestUnit) =
     var payload = {
         address: address, assetsName: assetsName, quantity: quantity, smallestUnit: smallestUnit
     }
-    const res = await axios(`${base_url}/assets/create-assets`, {
+    const res = await axios(`${base_url}assets/create-assets`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -233,6 +233,26 @@ export const tokenTransafer = async(address, assetsName, quantity) => {
         address: address, assetsName: assetsName, quantity: quantity
     }
     const res = await axios(`${base_url}assets/transfer-token`, {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        data: payload
+    }).then((result) => {
+        return result;
+    }).catch((err) => {
+        return err.response;
+    });
+
+    return res;
+}
+
+
+export const tokenTransaferBoth = async(fromAddress, toAddress, assetsName, quantity) => {
+    var payload = {
+        fromAddress: fromAddress, toAddress: toAddress, assetsName: assetsName, quantity: quantity
+    }
+    const res = await axios(`${base_url}assets/transfer-token-for-both`, {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',

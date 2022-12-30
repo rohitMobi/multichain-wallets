@@ -98,4 +98,29 @@ router.post('/transfer-token', async(req, res) => {
     });
 });
 
+router.post('/transfer-token-for-both', async(req, res) => {
+    const { fromAddress, toAddress, assetsName, quantity } = req.body;
+
+    var payload = {
+        "method" : "sendassetfrom",
+        "params" : [fromAddress, toAddress, assetsName, Number(quantity)],
+        "id" : 1,
+        "chain_name" : chain_name
+    };
+    
+    const encodedToken = await getDecodeAuth();
+    const result = await axios(`${base_url}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Basic '+ encodedToken
+        },
+        data: payload,
+    }).then((result) => {
+        return res.status(200).send({ status: "success", message: "Token Transfer Successfully 😀", data: result.data.result })
+    }).catch((err) => {
+        return err.response;
+    });
+});
+
 module.exports = router;

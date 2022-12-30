@@ -103,6 +103,29 @@
           "quantity": "50"
         }
       },
+      "TransferTokenBoth": {
+        "required": ["fromAddress", "toAddress", "assetsName", "quantity"],
+        "properties": {
+          "fromAddress": {
+            "type": "string"
+          },
+          "toAddress": {
+            "type": "string"
+          },
+          "assetsName": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "string"
+          }
+        },
+        "example": {
+          "fromAddress": "1JoXrvyD5NGsTUBeu8kgcLBZ5pWww3Z8MHGyBz",
+          "toAddress": "1ChLoT66BFGP3UASDhdRZFkCV3dqXeeeyMWbjY",
+          "assetsName": "MR",
+          "quantity": "50"
+        }
+      },
       "CreateStream": {
         "required": ["name"],
         "properties": {
@@ -298,6 +321,28 @@
                   "description": "address, assets name, quantity these all includes",
                   "schema": {
                     "$ref": "#/definitions/TransferToken"
+                  }
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "OK"
+                }
+              }
+          }
+        },
+
+        "/assets/transfer-token-for-both": {
+          "post": {
+              "tags": ["Assets"],
+              "summary": "Token Transfer For using two address",
+              "parameters": [
+                {
+                  "name": "data",
+                  "in": "body",
+                  "description": "from address, to address, assets name, quantity these all includes",
+                  "schema": {
+                    "$ref": "#/definitions/TransferTokenBoth"
                   }
                 }
               ],

@@ -47,6 +47,11 @@ const NavbarComponents = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
+                    <Link to="/buy-Token" className={ window.location.pathname === "/buy-Token" ? "nav-link link-active" : "nav-link"}>
+                      Buy Token
+                    </Link>
+                  </li>
+                  <li className="nav-item">
                     <Link to="/transactions" className={ window.location.pathname === "/transactions" ? "nav-link link-active" : "nav-link"}>
                       Transactions
                     </Link>

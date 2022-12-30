@@ -15,6 +15,7 @@ import NodeCompoenent from './Components/Node';
 import ChangePermissionCompoenent from './Components/ChangePermission';
 import ViewStreamsCompoenent from './Components/Streams/ViewSteams';
 import PublishStreamCompoenent from './Components/Streams/PublishStream';
+import ICOCompoenent from './Components/ICO';
 
 function App() {
   
@@ -43,6 +44,7 @@ function App() {
         <Route path='/assets' element={<><AssetsCompoenent /> <div className='main-container'></div></> } />
         <Route path='/addresses' element={<><AddressesCompoenent /> <div className='main-container'></div></> } />
         <Route path='/balance' element={<><TotalBalanceCompoenent /> <div className='main-container'></div></> } />
+        <Route path='/buy-Token' element={<><ICOCompoenent /> <div className='main-container'></div></> } />
       </Routes>
       <div className="footer__copyright" style={{ background: "transaparent" }}>
         <div className="container">

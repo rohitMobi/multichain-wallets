@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { getAssets, createAssets, tokenTransafer, getAddresses } from "../../Services/api";
+import { getAssets, createAssets, tokenTransafer, getAddresses, tokenTransaferBoth } from "../../Services/api";
 import toast from 'react-hot-toast';
 import $ from "jquery";
 
-const AssetsCompoenent = () => {
+const ICOCompoenent = () => {
 
   const [list, setList] = useState([]);
-  const [status, setStatus] = useState(0);
+  const [status, setStatus] = useState(2);
   const [loader, setLoader] = useState(false);
 
   const [address, setAddress] = useState("");
@@ -25,80 +25,13 @@ const AssetsCompoenent = () => {
     setAssetsName("");
     setQuantity("");
     setSmallestUnit("");
-    setStatus(0)
-  }
-
-  const dataTablesApply = () => {
-    if (!$.fn.DataTable.isDataTable("#tokenTableDT")) {
-      setTimeout(function () {
-        $("#tokenTableDT").dataTable({
-          "bDestroy": true,
-          pagingType: "full_numbers",
-          pageLength: 10,
-          processing: true,
-          dom: "Bfrtip",
-          select: {
-            style: "single",
-          },
-
-          buttons: [
-            // {
-            //   extend: "pageLength",
-            //   className: "btn btn-sm btn-secondary bg-secondary",
-            // },
-            // {
-            //   extend: "csv",
-            //   className: "btn btn-sm btn-success bg-success",
-            // },
-            // {
-            //   extend: "print",
-            //   customize: function (win) {
-            //     $(win.document.body).css("font-size", "10pt");
-            //     $(win.document.body)
-            //       .find("table")
-            //       .addClass("compact")
-            //       .css("font-size", "inherit");
-            //   },
-            //   className: "btn btn-sm btn-danger bg-danger",
-            // },
-          ],
-
-          fnRowCallback: function (
-            nRow,
-            aData,
-            iDisplayIndex,
-            iDisplayIndexFull
-          ) {
-            var index = iDisplayIndexFull + 1;
-            $("td:first", nRow).html(index);
-            return nRow;
-          },
-
-          lengthMenu: [
-            [10, 20, 30, 50, -1],
-            [10, 20, 30, 50, "All"],
-          ],
-          columnDefs: [
-            {
-              targets: 0,
-              render: function (data, type, row, meta) {
-                return type === "export" ? meta.row + 1 : data;
-              },
-            },
-          ],
-        });
-      }, 500);
-    }
+    setStatus(2)
   }
 
   const getList = async () => {
-    const res = await getAssets();
     const addressResult = await getAddresses();
-    console.log("res: ", res);
-    if (res.status === 200) {
-      setList(res.data.data);
+    if (addressResult.status === 200) {
       setAddress(addressResult.data.data[0].address)
-      dataTablesApply();
     }
   };
 
@@ -108,36 +41,17 @@ const AssetsCompoenent = () => {
       : "-";
   };
 
-  const createAssetSNew = async () => {
-    setLoader(true);
-
-    if(!address || !assetsName || !quantity || !smallestUnit){
-      toast.error("All fields mendatory.")
-      setLoader(false);
-    }
-
-    const res = await createAssets(address, assetsName, quantity, smallestUnit);
-    if(res.status === 200){
-      setLoader(false);
-      $("#tokenTableDT").DataTable().destroy()
-      getList();
-      clearFields();
-      toast.success("New Token Genarate Successfully.")
-    }
-  }
-
   const transferTokenNew = async () => {
     setLoader(true);
 
-    if(!toAddress || !assetsName || !quantity){
+    if(!fromAddress || !toAddress || !assetsName || !quantity){
       toast.error("All fields mendatory.")
       setLoader(false);
     }
 
-    const res = await tokenTransafer(toAddress, assetsName, quantity);
+    const res = await tokenTransaferBoth(fromAddress, toAddress, assetsName, quantity);
     if(res.status === 200){
       setLoader(false);
-      $("#tokenTableDT").DataTable().destroy()
       getList();
       clearFields();
       toast.success("Token Transfer Successfully.")
@@ -237,23 +151,12 @@ const AssetsCompoenent = () => {
               <div className="offset-lg-3 col-lg-6">
                 <div className="row mb-2">
                   {
-                    status === 1 && 
-                    <>
-                      <div className="col-sm-12">
-                      <div className="form-group">
-                        <label className="text-white">Address</label>
-                        <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setAddress(e.target.value) }} value={address} disabled="true" />
-                      </div>
-                    </div>
-                    </>
-                  }
-                  {
                     status === 2 && 
                     <>
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">From Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setFromAddress(e.target.value) }} value={address} disabled="true" />
+                          <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setFromAddress(e.target.value) }} />
                         </div>
                       </div>
                       <div className="col-sm-12">
@@ -276,36 +179,7 @@ const AssetsCompoenent = () => {
                       <input type="number" className="form-control" placeholder="Enter quantity" onChange={(e) => { setQuantity(e.target.value) }} />
                     </div>
                   </div>
-                  {
-                    status === 1 && 
-                    <>
-                      <div className="col-sm-12">
-                        <div className="form-group">
-                          <label className="text-white">Smallest Unit</label>
-                          <input type="number" className="form-control" placeholder="Enter smallest unit" onChange={(e) => { setSmallestUnit(e.target.value) }} />
-                        </div>
-                      </div>
-                    </>
-                  }
                   <div className="col-sm-12">
-                    {
-                      status === 1 && <>
-                        <button className="btn btn-primary btn-sm float-sm-right" onClick={() => createAssetSNew()}>
-                          {
-                            loader === true ? 
-                            <>
-                              <div className="spinner-border spinner-border-sm" role="status">
-                                <span className="visually-hidden"></span>
-                              </div>
-                            </>
-                            :
-                            <>
-                              Create Asset
-                            </>
-                          } 
-                        </button>
-                      </>
-                    }
                     {
                       status === 2 && <>
                         <button className="btn btn-primary btn-sm float-sm-right" onClick={() => transferTokenNew()}>
@@ -318,7 +192,7 @@ const AssetsCompoenent = () => {
                             </>
                             :
                             <>
-                              Asset Transfer
+                              Buy Token
                             </>
                           } 
                         </button>
@@ -336,10 +210,11 @@ const AssetsCompoenent = () => {
 
   return (
     <>
-      {status === 0 && listAssetsUI()}
       {(status === 1 || status === 2) && createAssetsORTransferTokenUI()}
     </>
   );
 };
 
-export default AssetsCompoenent;
+export default ICOCompoenent;
+// 1ChLoT66BFGP3UASDhdRZFkCV3dqXeeeyMWbjY
+// 13NQckpfy1S5VonqBpfrEzBCGihhuWERboAWxc
