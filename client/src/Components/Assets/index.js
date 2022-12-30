@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getAssets, createAssets, tokenTransafer, getAddresses } from "../../Services/api";
+import { getAssets, createAssets, tokenTransafer, getAddresses, getPermissions } from "../../Services/api";
 import toast from 'react-hot-toast';
 import $ from "jquery";
 
@@ -8,6 +8,8 @@ const AssetsCompoenent = () => {
   const [list, setList] = useState([]);
   const [status, setStatus] = useState(0);
   const [loader, setLoader] = useState(false);
+  const [permission, setPermission] = useState([]);
+  const [addressList, setAddressList] = useState([]);
 
   const [address, setAddress] = useState("");
   const [fromAddress, setFromAddress] = useState("");
@@ -94,12 +96,27 @@ const AssetsCompoenent = () => {
   const getList = async () => {
     const res = await getAssets();
     const addressResult = await getAddresses();
+    const permissions = await getPermissions();
     console.log("res: ", res);
     if (res.status === 200) {
       setList(res.data.data);
       setAddress(addressResult.data.data[0].address)
+      setFromAddress(addressResult.data.data[0].address)
       dataTablesApply();
+      var array = [];
+      if (addressResult.data.data.length > 0) {
+        addressResult.data.data.forEach(async (element) => {
+          let permissionsList = await filterPermissions(
+            element.address,
+            permissions.data.data
+          );
+          if (permissionsList.length > 0) {
+            array.push(element);
+          }
+        });
+      }
     }
+    setAddressList(array);
   };
 
   const changeAddressFormat = (ele) => {
@@ -132,6 +149,13 @@ const AssetsCompoenent = () => {
     if(!toAddress || !assetsName || !quantity){
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
+    }
+
+    if (address === toAddress) {
+      toast.error("From Address & To addres must be different");
+      setLoader(false);
+      return;
     }
 
     const res = await tokenTransafer(toAddress, assetsName, quantity);
@@ -143,6 +167,19 @@ const AssetsCompoenent = () => {
       toast.success("Token Transfer Successfully.")
     }
   }
+
+  const filterPermissions = async (address, array) => {
+    var result = array.filter((ele) => {
+      return (
+        ele.address === address &&
+        (ele.type == "mine" ||
+          ele.type == "send" ||
+          ele.type == "issue" ||
+          ele.type == "receive")
+      );
+    });
+    return result;
+  };
 
   const listAssetsUI = () => {
     return (
@@ -157,9 +194,9 @@ const AssetsCompoenent = () => {
                 <button className="btn btn-primary btn-sm float-sm-right" onClick={() => setStatus(1)}>
                   Create New Asset
                 </button>
-                <button className="btn btn-primary btn-sm float-sm-right mr-2" onClick={() => setStatus(2)}>
+                {/* <button className="btn btn-primary btn-sm float-sm-right mr-2" onClick={() => setStatus(2)}>
                   Assets Transfer
-                </button>
+                </button> */}
               </div>
             </div>
             <div className="row mt-3">
@@ -259,7 +296,27 @@ const AssetsCompoenent = () => {
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">To Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setToAddress(e.target.value) }} />
+                          <>
+                            <select
+                              class="form-control"
+                              aria-label="Default select example"
+                              onChange={(e) => {
+                                setToAddress(e.target.value);
+                              }}
+                              value={toAddress}
+                            >
+                              <option disabled="">select</option>
+                              {addressList.map((ele) => {
+                                return (
+                                  <>
+                                    <option value={ele.address}>
+                                      {ele.address}
+                                    </option>
+                                  </>
+                                );
+                              })}
+                            </select>
+                          </>
                         </div>
                       </div>
                     </>
