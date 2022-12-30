@@ -6,6 +6,7 @@ import $ from "jquery";
 const ICOCompoenent = () => {
 
   const [list, setList] = useState([]);
+  const [addressList, setAddressList] = useState([]);
   const [status, setStatus] = useState(2);
   const [loader, setLoader] = useState(false);
 
@@ -30,8 +31,11 @@ const ICOCompoenent = () => {
   }
 
   const getList = async () => {
+    const res = await getAssets();
     const addressResult = await getAddresses();
     if (addressResult.status === 200) {
+      setList(res.data.data);
+      setAddressList(addressResult.data.data)
       setAddress(addressResult.data.data[0].address)
     }
   };
@@ -48,6 +52,13 @@ const ICOCompoenent = () => {
     if(!fromAddress || !toAddress || !assetsName || !quantity){
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
+    }
+
+    if(fromAddress === toAddress){
+      toast.error("From Address & To addres must be different")
+      setLoader(false);
+      return;
     }
 
     const res = await tokenTransaferBoth(fromAddress, toAddress, assetsName, quantity);
@@ -152,13 +163,31 @@ const ICOCompoenent = () => {
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">From Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" value={fromAddress} onChange={(e) => { setFromAddress(e.target.value) }} />
+                          <> 
+                            <select class="form-control" aria-label="Default select example" onChange={(e) => { setFromAddress(e.target.value) }} value={fromAddress}>
+                              <option disabled="">select</option>
+                              { addressList.map((ele) => {
+                                return(<>
+                                    <option value={ele.address}>{ele.address}</option>
+                                </>)
+                              }) }
+                            </select>
+                          </>
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">To Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" value={toAddress} onChange={(e) => { setToAddress(e.target.value) }} />
+                          <> 
+                            <select class="form-control" aria-label="Default select example" onChange={(e) => { setToAddress(e.target.value) }} value={toAddress} >
+                              <option disabled="">select</option>
+                              { addressList.map((ele) => {
+                                return(<>
+                                    <option value={ele.address}>{ele.address}</option>
+                                </>)
+                              }) }
+                            </select>
+                          </>
                         </div>
                       </div>
                     </>
@@ -166,7 +195,16 @@ const ICOCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Asset Name</label>
-                      <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" value={assetsName} onChange={(e) => { setAssetsName(e.target.value) }} />
+                      <> 
+                        <select class="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }}  value={assetsName} >
+                          <option disabled="">select</option>
+                          { list.map((ele) => {
+                            return(<>
+                                <option value={ele.name}>{ele.name}</option>
+                            </>)
+                          }) }
+                        </select>
+                        </>
                     </div>
                   </div>
                   <div className="col-sm-12">

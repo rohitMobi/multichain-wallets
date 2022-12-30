@@ -32,9 +32,13 @@ body{
   border: solid 1px rgba(255, 255, 255, 0.3);
 }
 
-.transparent-card, input, textarea{
+.transparent-card, input, textarea, select{
   background: rgba(255, 255, 255, 0.09) !important;
   color: white !important;
+}
+
+option{
+  color: black;
 }
 
 .bg-transparent-blue{

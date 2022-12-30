@@ -267,7 +267,22 @@ const AssetsCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Asset Name</label>
-                      <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                      {
+                        status === 1 && <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                      }
+                      {
+                        status === 2 && 
+                        <> 
+                        <select class="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }} >
+                          <option disabled="">Open this select menu</option>
+                          { list.map((ele) => {
+                            return(<>
+                                <option value={ele.name}>{ele.name}</option>
+                            </>)
+                          }) }
+                        </select>
+                        </>
+                      }
                     </div>
                   </div>
                   <div className="col-sm-12">
