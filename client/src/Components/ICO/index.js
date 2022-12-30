@@ -6,12 +6,14 @@ import {
   getAddresses,
   tokenTransaferBoth,
   getPermissions,
+  gettotalbalances
 } from "../../Services/api";
 import toast from "react-hot-toast";
 import $ from "jquery";
 
 const ICOCompoenent = () => {
   const [list, setList] = useState([]);
+  const [balanceList, setBalanceList] = useState([])
   const [permission, setPermission] = useState([]);
   const [addressList, setAddressList] = useState([]);
   const [status, setStatus] = useState(2);
@@ -23,6 +25,7 @@ const ICOCompoenent = () => {
   const [assetsName, setAssetsName] = useState("");
   const [quantity, setQuantity] = useState("");
   const [smallestUnit, setSmallestUnit] = useState("");
+  
 
   useEffect(() => {
     getList();
@@ -41,7 +44,9 @@ const ICOCompoenent = () => {
     const res = await getAssets();
     const addressResult = await getAddresses();
     const permissions = await getPermissions();
-    if (addressResult.status === 200) {
+    const balanceResult = await gettotalbalances();
+    console.log("balance: ", balanceResult)
+    if (addressResult.status === 200 && balanceResult.status === 200) {
       setPermission(permissions.data.data);
       var array = [];
       if (addressResult.data.data.length > 0) {
@@ -55,6 +60,16 @@ const ICOCompoenent = () => {
           }
         });
       }
+      var array2 = [];
+      for (const obj in balanceResult.data.data) {
+        if (Object.hasOwnProperty.call(balanceResult.data.data, obj)) {
+            const element = balanceResult.data.data[obj];
+            element.forEach((ele) => {
+              array2.push({...ele, account: obj})
+            });
+        }
+      }
+      setBalanceList(array2)
       setList(res.data.data);
       setAddressList(array);
       setAddress(addressResult.data.data[0].address);
@@ -95,6 +110,27 @@ const ICOCompoenent = () => {
       return;
     }
 
+    var filterData = await balanceList.filter((ele) => { return (ele.account == fromAddress && ele.name == assetsName) });
+    console.log("filterData: ", filterData);
+
+    if(quantity == 0){
+      toast.error("Please enter quantity.");
+      setLoader(false);
+      return;
+    }
+
+    if(filterData.length === 0){
+      toast.error("Insufficient Balance");
+      setLoader(false);
+      return;
+    }
+
+    if(Number(filterData[0].qty) < Number(quantity)){
+      toast.error("Insufficient Balance");
+      setLoader(false);
+      return;
+    }
+
     const res = await tokenTransaferBoth(
       fromAddress,
       toAddress,
@@ -107,86 +143,6 @@ const ICOCompoenent = () => {
       clearFields();
       toast.success("Token Transfer Successfully.");
     }
-  };
-
-  const listAssetsUI = () => {
-    return (
-      <>
-        <div className="content-header">
-          <div className="container">
-            <div className="row mb-2">
-              <div className="col-sm-6">
-                <h1 className="m-0 text-white"> Assets List</h1>
-              </div>
-              <div className="col-sm-6">
-                <button
-                  className="btn btn-primary btn-sm float-sm-right"
-                  onClick={() => setStatus(1)}
-                >
-                  Create New Asset
-                </button>
-                <button
-                  className="btn btn-primary btn-sm float-sm-right mr-2"
-                  onClick={() => setStatus(2)}
-                >
-                  Assets Transfer
-                </button>
-              </div>
-            </div>
-            <div className="row mt-3">
-              <div className="col-md-12">
-                <div className="card transparent-card">
-                  <div className="card-body p-2">
-                    <table className="table" id="tokenTableDT">
-                      <thead>
-                        <tr>
-                          <th style={{ width: "10px" }}>#</th>
-                          <th>Asset Name</th>
-                          <th>Issue Trnsaction ID</th>
-                          <th>Units</th>
-                          <th>Quantity</th>
-                          <th>Type</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {list.length > 0 ? (
-                          list.map((ele, index) => {
-                            return (
-                              <>
-                                <tr>
-                                  <td>{index + 1}</td>
-                                  <td>{ele.name}</td>
-                                  <td>{changeAddressFormat(ele.issuetxid)}</td>
-                                  <td>{ele.units}</td>
-                                  <td>{ele.issueqty}</td>
-                                  <td>
-                                    {ele.fungible === true
-                                      ? "Fungible Token"
-                                      : "Non Fungible Token"}
-                                  </td>
-                                </tr>
-                              </>
-                            );
-                          })
-                        ) : (
-                          <>
-                            <tr>
-                              <td colSpan={6} className="text-center">
-                                No assets found.
-                              </td>
-                            </tr>
-                          </>
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </>
-    );
   };
 
   const createAssetsORTransferTokenUI = () => {
@@ -211,7 +167,7 @@ const ICOCompoenent = () => {
                           <label className="text-white">From Address</label>
                           <>
                             <select
-                              class="form-control"
+                              className="form-control"
                               aria-label="Default select example"
                               onChange={(e) => {
                                 setFromAddress(e.target.value);
@@ -237,7 +193,7 @@ const ICOCompoenent = () => {
                           <label className="text-white">To Address</label>
                           <>
                             <select
-                              class="form-control"
+                              className="form-control"
                               aria-label="Default select example"
                               onChange={(e) => {
                                 setToAddress(e.target.value);
@@ -265,7 +221,7 @@ const ICOCompoenent = () => {
                       <label className="text-white">Asset Name</label>
                       <>
                         <select
-                          class="form-control"
+                          className="form-control"
                           aria-label="Default select example"
                           onChange={(e) => {
                             setAssetsName(e.target.value);
@@ -302,6 +258,7 @@ const ICOCompoenent = () => {
                     {status === 2 && (
                       <>
                         <button
+                          type="button"
                           className="btn btn-primary btn-sm float-sm-right"
                           onClick={() => transferTokenNew()}
                         >

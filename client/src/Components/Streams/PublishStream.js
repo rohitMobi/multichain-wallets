@@ -96,7 +96,7 @@ const PublishStreamCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">JSON Data</label>
-                      <textarea class="form-control" placeholder="JSON data" rows="3" onChange={(e) => setValue(e.target.value)}></textarea>
+                      <textarea className="form-control" placeholder="JSON data" rows="3" onChange={(e) => setValue(e.target.value)}></textarea>
                     </div>
                   </div>
                   <div className="col-sm-12">

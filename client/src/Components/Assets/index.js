@@ -298,7 +298,7 @@ const AssetsCompoenent = () => {
                           <label className="text-white">To Address</label>
                           <>
                             <select
-                              class="form-control"
+                              className="form-control"
                               aria-label="Default select example"
                               onChange={(e) => {
                                 setToAddress(e.target.value);
@@ -330,7 +330,7 @@ const AssetsCompoenent = () => {
                       {
                         status === 2 && 
                         <> 
-                        <select class="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }} >
+                        <select className="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }} >
                           <option disabled="">Open this select menu</option>
                           { list.map((ele) => {
                             return(<>

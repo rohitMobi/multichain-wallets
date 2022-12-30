@@ -128,13 +128,13 @@ const ChangePermissionCompoenent = () => {
                     <div className="form-group">
                       <label className="text-white">Operation</label>
                       <div className="row ml-2">
-                        <div class="custom-control custom-radio form-check-inline">
-                          <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="grant" onClick={() => { setOperation('grant') }} />
-                          <label class="custom-control-label text-white" for="inlineRadio1">grant</label>
+                        <div className="custom-control custom-radio form-check-inline">
+                          <input className="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="grant" onClick={() => { setOperation('grant') }} />
+                          <label className="custom-control-label text-white" for="inlineRadio1">grant</label>
                         </div>
-                        <div class="custom-control custom-radio form-check-inline">
-                          <input class="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="revoke"  onClick={() => { setOperation('revoke') }} />
-                          <label class="custom-control-label  text-white" for="inlineRadio2">revoke</label>
+                        <div className="custom-control custom-radio form-check-inline">
+                          <input className="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="revoke"  onClick={() => { setOperation('revoke') }} />
+                          <label className="custom-control-label  text-white" for="inlineRadio2">revoke</label>
                         </div>
                       </div>
                     </div>
@@ -150,9 +150,9 @@ const ChangePermissionCompoenent = () => {
                           checkboxArray.map((checkbox, index) => {
                             return(
                               <>
-                                <div class="custom-control custom-checkbox form-check-inline">
-                                  <input class="custom-control-input" type="checkbox" id={`inlineCheckbox${index+1}`} value={checkbox.check} onChange={() => { setValuePermissions(index) }} />
-                                  <label class="custom-control-label text-white" for={`inlineCheckbox${index+1}`}>{checkbox.name}</label>
+                                <div className="custom-control custom-checkbox form-check-inline">
+                                  <input className="custom-control-input" type="checkbox" id={`inlineCheckbox${index+1}`} value={checkbox.check} onChange={() => { setValuePermissions(index) }} />
+                                  <label className="custom-control-label text-white" for={`inlineCheckbox${index+1}`}>{checkbox.name}</label>
                                 </div>
                               </>
                             )
