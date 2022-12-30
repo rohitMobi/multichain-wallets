@@ -21,7 +21,8 @@ const ICOCompoenent = () => {
   }, []);
 
   const clearFields = () => {
-    setAddress("");
+    setFromAddress("");
+    setToAddress("");
     setAssetsName("");
     setQuantity("");
     setSmallestUnit("");
@@ -139,12 +140,7 @@ const ICOCompoenent = () => {
           <div className="container">
             <div className="row mb-5">
               <div className="col-sm-6">
-                <h1 className="m-0 text-white"> { status === 1 && "Create token" } { status === 2 && "Token Transfer" } </h1>
-              </div>
-              <div className="col-sm-6">
-                <button className="btn btn-warning btn-sm float-sm-right" onClick={() => clearFields()}>
-                  Back
-                </button>
+                <h1 className="m-0 text-white">{ status === 2 && "Buy Token" } </h1>
               </div>
             </div>
             <div className="row">
@@ -156,13 +152,13 @@ const ICOCompoenent = () => {
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">From Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setFromAddress(e.target.value) }} />
+                          <input type="text" className="form-control" placeholder="Enter address" value={fromAddress} onChange={(e) => { setFromAddress(e.target.value) }} />
                         </div>
                       </div>
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">To Address</label>
-                          <input type="text" className="form-control" placeholder="Enter address" onChange={(e) => { setToAddress(e.target.value) }} />
+                          <input type="text" className="form-control" placeholder="Enter address" value={toAddress} onChange={(e) => { setToAddress(e.target.value) }} />
                         </div>
                       </div>
                     </>
@@ -170,13 +166,13 @@ const ICOCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Asset Name</label>
-                      <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                      <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" value={assetsName} onChange={(e) => { setAssetsName(e.target.value) }} />
                     </div>
                   </div>
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Quantity</label>
-                      <input type="number" className="form-control" placeholder="Enter quantity" onChange={(e) => { setQuantity(e.target.value) }} />
+                      <input type="number" className="form-control" placeholder="Enter quantity" value={quantity} onChange={(e) => { setQuantity(e.target.value) }} />
                     </div>
                   </div>
                   <div className="col-sm-12">
