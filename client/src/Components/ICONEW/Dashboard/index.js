@@ -6,15 +6,15 @@ const ICODashboardCompoenent = () => {
           <div className="row font-v2">
             <div className="col-lg-6" style={{ marginTop: "6rem" }}>
               <div class="hero-content">
-                <h4 class="wow fadeInUp" data-wow-delay=".2s" style={{ visibility: "visible", animationDelay: "0.2s", animationName: "fadeInUp" }}>Start Envesting &amp; Earn Money</h4>
-                <h1 class="wow fadeInUp" data-wow-delay=".4s" style={{ visibility: "visible", animationDelay: "0.4s", animationName: "fadeInUp" }}>Say goodbye
+                <h4 class="display-4" data-wow-delay=".2s" style={{ visibility: "visible", animationDelay: "0.2s", animationName: "fadeInUp", fontSize: "2rem" }}>Start Envesting &amp; Earn Money</h4><br /><br />
+                <h1 class="display-4" data-wow-delay=".4s" style={{ visibility: "visible", animationDelay: "0.4s", animationName: "fadeInUp", fontSize: "5rem" }}>Say goodbye
                   to <br />idle
                   <span>
                     <img class="text-shape" src="https://preview.uideck.com/items/cryptoland/assets/images/hero/text-shape.svg" alt="#" />
                     money.
                   </span>
                 </h1>
-                <p class="wow fadeInUp" data-wow-delay=".6s" style={{ visibility: "visible", animationDelay: "0.6s", animationName: "fadeInUp" }}>Invest your spare change in Raksha Token and save
+                <p class="display-4" data-wow-delay=".6s" style={{ visibility: "visible", animationDelay: "0.6s", animationName: "fadeInUp" }}>Invest your spare change in Raksha Token and save
                   with<br /> crypto to earn interest in real time.
                 </p>
               </div>

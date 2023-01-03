@@ -18,6 +18,7 @@ import PublishStreamCompoenent from './Components/Streams/PublishStream';
 import ICOCompoenent from './Components/ICO';
 import WhiteComponent from './Components/WhitePaper';
 import ICODashboardCompoenent from './Components/ICONEW/Dashboard';
+import ICOLoginCompoenent from './Components/ICONEW/Login';
 
 function App() {
   
@@ -50,8 +51,9 @@ function App() {
         <Route path='/token-transfer' element={<><ICOCompoenent /> <div className='main-container'></div></> } />
 
 
-        <Route path='/ico/white-paper' element={<><WhiteComponent /> <div className='main-container'></div></> } />
+        <Route path='/ico/white-paper' element={<><WhiteComponent /></> } />
         <Route path='/ico/dashboard' element={<><ICODashboardCompoenent /></> } />
+        <Route path='/ico/login' element={<><ICOLoginCompoenent /></> } />
       </Routes>
       <div className="footer__copyright" style={{ background: "transaparent" }}>
         <div className="container">
