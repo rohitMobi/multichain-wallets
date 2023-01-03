@@ -153,7 +153,7 @@ const ICOCompoenent = () => {
             <div className="row mb-5">
               <div className="col-sm-6">
                 <h1 className="m-0 text-white">
-                  {status === 2 && "Buy Token"}{" "}
+                  {status === 2 && "Token Transfer"}{" "}
                 </h1>
               </div>
             </div>
