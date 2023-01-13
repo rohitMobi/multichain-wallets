@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 const TotalBalanceCompoenent = () => {
 
   const [list, setList] = useState([])
+  const [listNew, setListNew] = useState([])
 
   useEffect(() => {
     getList();
@@ -16,18 +17,33 @@ const TotalBalanceCompoenent = () => {
       var array = [];
       for (const obj in res.data.data) {
         if (Object.hasOwnProperty.call(res.data.data, obj)) {
-            const element = res.data.data[obj];
-            element.forEach((ele) => {
-              array.push({...ele, account: obj})
-            });
+          const element = res.data.data[obj];
+          element.forEach((ele) => {
+            array.push({ ...ele, account: obj })
+          });
         }
       }
       setList(array)
+      setListNew(array)
     }
   }
 
   const changeAddressFormat = (ele) => {
-    return ( (ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
+    return ((ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
+  }
+
+  function filterByValue(string) {
+    return list.filter(o =>
+        Object.keys(o).some(k => o[k].toString().toLowerCase().includes(string.toLowerCase())));
+  }
+
+  const onKeyType = (e) => {
+    setListNew(filterByValue(e))
+  }
+
+  const copyPaste = (text) => {
+    navigator.clipboard.writeText(text)
+    toast.success("Copy wallet address " + changeAddressFormat(text));
   }
 
   return (
@@ -38,24 +54,32 @@ const TotalBalanceCompoenent = () => {
             <div className="col-sm-6">
               <h1 className="m-0 text-white"> Available Balances </h1>
             </div>
+            <div className="col-sm-6 dataTables_wrapper no-footer" id="tokenTableDT_wrapper">
+              <div id="tokenTableDT_filter" class="dataTables_filter">
+                <label className="text-white">
+                  Search:
+                  <input type="search" onKeyUp={(e) => onKeyType(e.target.value)} class="" placeholder="" aria-controls="tokenTableDT" />
+                </label>
+              </div>
+            </div>
           </div>
           <div className="row mt-3">
             <div className="col-md-12">
               <div className="row">
                 {
-                  list.length > 0 ?
-                    list.filter((ele) => { return ele.account !== "total" }).map((ele, index) => {
+                  listNew.length > 0 ?
+                    listNew.filter((ele) => { return ele.account !== "total" }).map((ele, index) => {
                       return (<>
                         <div className="col-lg-3 col-6">
                           <div className="small-box bg-transparent-blue">
                             <div className="right-gold"></div>
                             <div className="inner">
-                              <h3>{ele.qty} <span style={{fontSize: "small"}}>{ele.name}</span></h3>
-                              <p>{ ele.account === "total" ? "Total" : changeAddressFormat(ele.account)}</p>
+                              <h3>{ele.qty} <span style={{ fontSize: "small" }}>{ele.name}</span></h3>
+                              <p>{ele.account === "total" ? "Total" : changeAddressFormat(ele.account)} <i class="fa fa-clone" style={{ zindex: 1 }} aria-hidden="true" onClick={() => { copyPaste(ele.account) }}></i></p>
                             </div>
-                            <div className="icon">
+                            {/* <div className="icon">
                               <i className="ion ion-bag"></i>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </>)
@@ -74,15 +98,15 @@ const TotalBalanceCompoenent = () => {
             <div className="col-md-12">
               <div className="row">
                 {
-                  list.length > 0 ?
-                    list.filter((ele) => { return ele.account === "total" }).map((ele, index) => {
+                  listNew.length > 0 ?
+                    listNew.filter((ele) => { return ele.account === "total" }).map((ele, index) => {
                       return (<>
                         <div className="col-lg-3 col-6">
                           <div className="small-box bg-transparent-blue">
                             <div className="right-gold"></div>
                             <div className="inner">
-                              <h3>{ele.qty} <span style={{fontSize: "small"}}>{ele.name}</span></h3>
-                              <p>{ ele.account === "total" ? "Total" : changeAddressFormat(ele.account)}</p>
+                              <h3>{ele.qty} <span style={{ fontSize: "small" }}>{ele.name}</span></h3>
+                              <p>{ele.account === "total" ? "Total" : changeAddressFormat(ele.account)}</p>
                             </div>
                             <div className="icon">
                               <i className="ion ion-bag"></i>

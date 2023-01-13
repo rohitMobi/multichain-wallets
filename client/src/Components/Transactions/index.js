@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { getTransactions } from "../../Services/api";
 import { format } from 'date-fns'
+import toast from 'react-hot-toast';
 import $ from "jquery";
 
 const TransactionsCompoenent = () => {
@@ -92,6 +93,11 @@ const TransactionsCompoenent = () => {
     return date;
   }
 
+  const copyPaste = (text) => {
+    navigator.clipboard.writeText(text)
+    toast.success("Copy wallet address " + changeAddressFormat(text));
+  }
+
     return (
       <>
         <div className="content-header">
@@ -109,8 +115,8 @@ const TransactionsCompoenent = () => {
                       <thead>
                         <tr>
                           <th style={{width: "10px"}}>#</th>
-                          <th>From address</th>
-                          <th>To address</th>
+                          <th>Addresses</th>
+                          <th>Transaction Type</th>
                           <th>Block Hash</th>
                           <th>Transaction Id</th>
                           <th style={{width: "20%"}}>Date & Time</th>
@@ -124,7 +130,15 @@ const TransactionsCompoenent = () => {
                               <tr>
                                 <td>{index + 1}</td>
                                 <td>{changeAddressFormat(ele.myaddresses[0])}</td>
-                                <td>{changeAddressFormat(ele.addresses[0])}</td>
+                                <td>
+                                  {
+                                    ele.permissions.length > 0 ? <span className="badge badge-pill bg-info">Change Permissions</span> :
+                                      ele.balance.assets.length > 0 && ele.issue ? <span className="badge badge-pill bg-purple">Create Assets</span> :
+                                        ele.create ? <span className="badge badge-pill bg-pink">Create Stream</span> :
+                                          ele.myaddresses.length == 2 ? <span className="badge badge-pill bg-indigo">Token Transfer</span> :
+                                            ele.items.length > 0 ? <span className="badge badge-pill bg-maroon">Write data on Stream</span> : <span className="badge badge-pill bg-primary">Normal Transaction</span>
+                                  }
+                                </td>
                                 <td>{changeAddressFormat(ele.blockhash)}</td>
                                 <td>{changeAddressFormat(ele.txid)}</td>
                                 <td>{format(convertDate(ele.time), 'dd MMM, yyyy hh:mm a')}</td>
