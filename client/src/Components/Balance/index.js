@@ -32,13 +32,30 @@ const TotalBalanceCompoenent = () => {
     return ((ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
   }
 
-  function filterByValue(string) {
-    return list.filter(o =>
-        Object.keys(o).some(k => o[k].toString().toLowerCase().includes(string.toLowerCase())));
+  async function filterByValue(string) {
+    const res = await gettotalbalances();
+    if (res.status === 200) {
+      var array = [];
+      for (const obj in res.data.data) {
+        if (Object.hasOwnProperty.call(res.data.data, obj)) {
+          const element = res.data.data[obj];
+          element.forEach((ele) => {
+            array.push({ ...ele, account: obj })
+          });
+        }
+      }
+
+
+      const filtered = array.filter(entry => Object.values(entry).some(val => typeof val === "string" && val.includes(string)));
+      // console.log("filtered: ", filtered);
+      return filtered;
+    }
   }
 
-  const onKeyType = (e) => {
-    setListNew(filterByValue(e))
+  const onKeyType = async(e) => {
+    var result = await filterByValue(e);
+    console.log("result : ", result)
+    setListNew(result)
   }
 
   const copyPaste = (text) => {

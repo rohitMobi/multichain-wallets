@@ -14,13 +14,13 @@ var serverbase_url = "http://localhost:6794/";
 var serverchain_name = "chainOne";
 
 exports.getDecodeAuth = () => {
-    var username = windowsusername;
-    var password = windowspassword;
+    var username = serverusername;
+    var password = serverpassword;
 
     const token = `${username}:${password}`;
     const encodedToken = Buffer.from(token).toString('base64');
     return encodedToken;
 }
 
-exports.base_url = windowsbase_url.toString();
-exports.chain_name = windowschain_name.toString();
+exports.base_url = serverbase_url.toString();
+exports.chain_name = serverchain_name.toString();
