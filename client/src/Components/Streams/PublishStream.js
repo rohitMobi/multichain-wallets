@@ -13,6 +13,8 @@ const PublishStreamCompoenent = () => {
   const [address, setAddress] = useState("");
   const [stream, setStream] = useState("");
   const [key, setKey] = useState("");
+  const [objKey, setObjKey] = useState("");
+  const [objValue, setObjValue] = useState("");
   const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -23,6 +25,26 @@ const PublishStreamCompoenent = () => {
     setAddress("");
     setKey("");
     setValue("");
+    setObjKey("");
+    setObjValue("");
+  }
+
+  const isValidKeys = (text) => {
+    if(text.length > 20){
+      setKey(text.substr(0, 20))
+    }
+  }
+
+  const isValidObjKey = (text) => {
+    if(text.length > 20){
+      setObjKey(text.substr(0, 20))
+    }
+  }
+
+  const isValidObjValue = (text) => {
+    if(text.length > 20){
+      setObjValue(text.substr(0, 20))
+    }
   }
 
   const getList = async () => {
@@ -37,14 +59,18 @@ const PublishStreamCompoenent = () => {
   };
 
   const publistStream = async () => {
+    
     setLoader(true);
 
-    if (!stream || !key || !value) {
+    if (!stream || !key || !objKey || !objValue) {
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
     }
 
-    const res = await publishStreamItems(stream, key, JSON.parse(value.trim().replaceAll(" ", "")));
+    const valueObj = JSON.parse(`{"${objKey}":"${objValue}"}`);
+
+    const res = await publishStreamItems(stream, key, valueObj);
     console.log("res: ", res)
     if(res.status === 200){
       setLoader(false);
@@ -90,15 +116,24 @@ const PublishStreamCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Operational Keys</label>
-                      <input type="text" className="form-control" placeholder="Enter Operational Keys" onChange={(e) => setKey(e.target.value)} />
+                      <input type="text" className="form-control" placeholder="Enter Operational Keys" onKeyUp={(e) => { isValidKeys(e.target.value) }} value={key} onChange={(e) => setKey(e.target.value)} />
                     </div>
                   </div>
                   <div className="col-sm-12">
                     <div className="form-group">
+                      <label className="text-white">Data</label>
+                      <div className="row">
+                        <div className="col-sm-4"><input type="text" className="form-control" placeholder="Key" onKeyUp={(e) => { isValidObjKey(e.target.value) }} value={objKey} onChange={(e) => setObjKey(e.target.value)} /></div>
+                        <div className="col-sm-4"><input type="text" className="form-control" placeholder="Value" onKeyUp={(e) => { isValidObjValue(e.target.value) }} value={objValue} onChange={(e) => setObjValue(e.target.value)} /></div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* <div className="col-sm-12">
+                    <div className="form-group">
                       <label className="text-white">JSON Data</label>
                       <textarea className="form-control" placeholder="JSON data" rows="3" onChange={(e) => setValue(e.target.value)}></textarea>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="col-sm-12">
                     <button className="btn btn-primary btn-sm float-sm-right" onClick={() => publistStream()}>
                       {

@@ -30,6 +30,25 @@ const AssetsCompoenent = () => {
     setStatus(0)
   }
 
+  
+  const isValidAssetsName = (text) => {
+    if(text.length > 20){
+      setAssetsName(text.substr(0, 20))
+    }
+  }
+  
+  const isValidQantity = (value) => {
+    if(value > 1000000000){
+      setQuantity(1000000000)
+    }
+  }
+  
+  const isValidUnit = (value) => {
+    if(value > 1){
+      setSmallestUnit(1)
+    }
+  }
+
   const dataTablesApply = () => {
     if (!$.fn.DataTable.isDataTable("#tokenTableDT")) {
       setTimeout(function () {
@@ -131,6 +150,14 @@ const AssetsCompoenent = () => {
     if(!address || !assetsName || !quantity || !smallestUnit){
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
+    }
+
+    const isAssetsNameValue = list.filter((ele) => { return ele.name === assetsName; })
+    if(isAssetsNameValue.length > 0){
+      toast.error("Asset name must be unique.")
+      setLoader(false);
+      return;
     }
 
     const res = await createAssets(address, assetsName, quantity, smallestUnit);
@@ -262,7 +289,7 @@ const AssetsCompoenent = () => {
           <div className="container">
             <div className="row mb-5">
               <div className="col-sm-6">
-                <h1 className="m-0 text-white"> { status === 1 && "Create token" } { status === 2 && "Token Transfer" } </h1>
+                <h1 className="m-0 text-white"> { status === 1 && "Create Assets" } { status === 2 && "Token Transfer" } </h1>
               </div>
               <div className="col-sm-6">
                 <button className="btn btn-warning btn-sm float-sm-right" onClick={() => clearFields()}>
@@ -325,19 +352,19 @@ const AssetsCompoenent = () => {
                     <div className="form-group">
                       <label className="text-white">Asset Name</label>
                       {
-                        status === 1 && <input type="text" className="form-control" placeholder="Enter ssset name, example : (MTK)" onChange={(e) => { setAssetsName(e.target.value) }} />
+                        status === 1 && <input type="text" className="form-control" placeholder="Enter asset name, example : (MTK)" onKeyUp={(e) => { isValidAssetsName(e.target.value) }} value={assetsName} onChange={(e) => { setAssetsName(e.target.value) }} />
                       }
                       {
                         status === 2 && 
                         <> 
-                        <select className="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }} >
-                          <option disabled="">Open this select menu</option>
-                          { list.map((ele) => {
-                            return(<>
-                                <option value={ele.name}>{ele.name}</option>
-                            </>)
-                          }) }
-                        </select>
+                          <select className="form-control" aria-label="Default select example" onChange={(e) => { setAssetsName(e.target.value) }} >
+                            <option disabled="">Open this select menu</option>
+                            { list.map((ele) => {
+                              return(<>
+                                  <option value={ele.name}>{ele.name}</option>
+                              </>)
+                            }) }
+                          </select>
                         </>
                       }
                     </div>
@@ -345,7 +372,7 @@ const AssetsCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Quantity</label>
-                      <input type="number" className="form-control" placeholder="Enter quantity" onChange={(e) => { setQuantity(e.target.value) }} />
+                      <input type="number" className="form-control" placeholder="Enter quantity" onKeyUp={(e) => { isValidQantity(e.target.value) }} value={quantity} onChange={(e) => { setQuantity(e.target.value) }} />
                     </div>
                   </div>
                   {
@@ -354,7 +381,7 @@ const AssetsCompoenent = () => {
                       <div className="col-sm-12">
                         <div className="form-group">
                           <label className="text-white">Smallest Unit</label>
-                          <input type="number" className="form-control" placeholder="Enter smallest unit" onChange={(e) => { setSmallestUnit(e.target.value) }} />
+                          <input type="number" className="form-control" placeholder="Enter smallest unit" onKeyUp={(e) => { isValidUnit(e.target.value) }} value={smallestUnit} onChange={(e) => { setSmallestUnit(e.target.value) }} />
                         </div>
                       </div>
                     </>

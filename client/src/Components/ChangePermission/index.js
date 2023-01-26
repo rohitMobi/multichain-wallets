@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { changePermissionAddress, getAddresses } from "../../Services/api"
+import { changePermissionAddress, getAddresses, getPermissions } from "../../Services/api"
 import { Link, useNavigate } from "react-router-dom";
 import toast from 'react-hot-toast';
 
@@ -42,8 +42,12 @@ const ChangePermissionCompoenent = () => {
     const address = queryParams.get("address")
     setToAddress(address);
     const addressResult = await getAddresses();
-    if (addressResult.status === 200) {
+    const permissions = await getPermissions();
+    if (addressResult.status === 200 && permissions.status === 200) {
       setAddressList(addressResult.data.data);
+      const permissionList = permissions.data.data.filter((ele) => { return ele.address === address})
+      console.log("permissionList: ", permissionList);
+      setPermisssion(permissionList);
       setAddress(addressResult.data.data[0].address)
     }
   };
@@ -55,6 +59,7 @@ const ChangePermissionCompoenent = () => {
     if (!toAddress || !operation || !permissionList) {
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
     }
 
     const res = await changePermissionAddress(operation, toAddress, permissionList);
@@ -89,6 +94,25 @@ const ChangePermissionCompoenent = () => {
       document.getElementById("permissionList").value = permissions;
     }else{
       document.getElementById("permissionList").value = permissions;
+    }
+  }
+
+  const filterType = (type) => {
+    console.log("permisssion: ", permisssion)
+    if(permisssion){
+      console.log("permisssion.length: ", permisssion.length);
+      console.log("permisssion.length: ", permisssion.length);
+      const filter = permisssion.filter(permiss => { return permiss.type === type})
+      if(operation == "grant" && (filter.length == 0 || permisssion.length == 0)){
+        console.log("True");
+        return true;
+      }else if(operation == "revoke" && filter.length > 0){
+        console.log("True");
+        return true;
+      }else{
+        console.log("False");
+        return false;
+      }
     }
   }
 
@@ -132,10 +156,15 @@ const ChangePermissionCompoenent = () => {
                           <input className="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="grant" onClick={() => { setOperation('grant') }} />
                           <label className="custom-control-label text-white" for="inlineRadio1">grant</label>
                         </div>
-                        <div className="custom-control custom-radio form-check-inline">
-                          <input className="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="revoke"  onClick={() => { setOperation('revoke') }} />
-                          <label className="custom-control-label  text-white" for="inlineRadio2">revoke</label>
-                        </div>
+                        {
+                          permisssion.length > 0 &&
+                          <>
+                            <div className="custom-control custom-radio form-check-inline">
+                              <input className="custom-control-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="revoke"  onClick={() => { setOperation('revoke') }} />
+                              <label className="custom-control-label  text-white" for="inlineRadio2">revoke</label>
+                            </div>
+                          </>
+                        }
                       </div>
                     </div>
                   </div>
@@ -150,10 +179,22 @@ const ChangePermissionCompoenent = () => {
                           checkboxArray.map((checkbox, index) => {
                             return(
                               <>
-                                <div className="custom-control custom-checkbox form-check-inline">
+                                {
+                                  (filterType(checkbox.name) == true) && 
+                                  <>
+                                    <div className="custom-control custom-checkbox form-check-inline">
+                                      <input className="custom-control-input" type="checkbox" id={`inlineCheckbox${index+1}`} value={checkbox.check} onChange={() => { setValuePermissions(index) }} />
+                                      <label className="custom-control-label text-white" for={`inlineCheckbox${index+1}`}>{checkbox.name}</label>
+                                    </div>
+                                  </>
+                                }
+                                {
+                                  console.log("status: ", filterType(checkbox.name))
+                                }
+                                {/* <div className="custom-control custom-checkbox form-check-inline">
                                   <input className="custom-control-input" type="checkbox" id={`inlineCheckbox${index+1}`} value={checkbox.check} onChange={() => { setValuePermissions(index) }} />
                                   <label className="custom-control-label text-white" for={`inlineCheckbox${index+1}`}>{checkbox.name}</label>
-                                </div>
+                                </div> */}
                               </>
                             )
                           })

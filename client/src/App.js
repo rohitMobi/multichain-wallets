@@ -26,7 +26,7 @@ function App() {
 
   return (
     <>
-      <Toaster position="bottom-center" />
+      <Toaster position="top-right" />
       <NavbarComponents />
       {
         (location.pathname === "/home" && <>

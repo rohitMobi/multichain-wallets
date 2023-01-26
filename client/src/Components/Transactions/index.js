@@ -85,6 +85,7 @@ const TransactionsCompoenent = () => {
   }
 
   const changeAddressFormat = (ele) => {
+    // return ele;
     return ( (ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
   }
 
@@ -93,9 +94,9 @@ const TransactionsCompoenent = () => {
     return date;
   }
 
-  const copyPaste = (text) => {
-    navigator.clipboard.writeText(text)
-    toast.success("Copy wallet address " + changeAddressFormat(text));
+  const copyPaste = (address, text) => {
+    navigator.clipboard.writeText(address)
+    toast.success(`Copy ${text} ${changeAddressFormat(address)}`);
   }
 
     return (
@@ -129,7 +130,7 @@ const TransactionsCompoenent = () => {
                             return(<>
                               <tr>
                                 <td>{index + 1}</td>
-                                <td>{changeAddressFormat(ele.myaddresses[0])}</td>
+                                <td>{changeAddressFormat(ele.myaddresses[0])} <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.myaddresses[0]), "Wallet Address")} style={{cursor: "pointer"}}></i></></td>
                                 <td>
                                   {
                                     ele.permissions.length > 0 ? <span className="badge badge-pill bg-info">Change Permissions</span> :
@@ -140,7 +141,7 @@ const TransactionsCompoenent = () => {
                                   }
                                 </td>
                                 <td>{changeAddressFormat(ele.blockhash)}</td>
-                                <td>{changeAddressFormat(ele.txid)}</td>
+                                <td>{changeAddressFormat(ele.txid)} <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.txid), "Transaction Id")} style={{cursor: "pointer"}}></i></></td>
                                 <td>{format(convertDate(ele.time), 'dd MMM, yyyy hh:mm a')}</td>
                               </tr>
                             </>)

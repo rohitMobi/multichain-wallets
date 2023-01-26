@@ -96,7 +96,11 @@ const StreamsCompoenent = () => {
     return ((ele !== "" && ele !== null && ele !== undefined) ? ele.substr(0, 4) + "..." + ele.substr(ele.length - 4, ele.length) : "-")
   }
 
-
+  const isValidName = (name) => {
+    if(name.length > 20){
+      setName(name.substr(0, 20))
+    }
+  }
 
   const createAssetSNew = async () => {
     setLoader(true);
@@ -104,6 +108,14 @@ const StreamsCompoenent = () => {
     if (!name) {
       toast.error("All fields mendatory.")
       setLoader(false);
+      return;
+    }
+
+    const isNameValue = list.filter((ele) => { return ele.name === name; })
+    if(isNameValue.length > 0){
+      toast.error("Stream name must be unique.")
+      setLoader(false);
+      return;
     }
 
     const res = await createStream(name);
@@ -217,7 +229,7 @@ const StreamsCompoenent = () => {
                   <div className="col-sm-12">
                     <div className="form-group">
                       <label className="text-white">Stream Name</label>
-                      <input type="text" className="form-control" placeholder="Enter Stream Name" onChange={(e) => { setName(e.target.value) }} />
+                      <input type="text" className="form-control" placeholder="Enter Stream Name" onKeyUp={(e) => isValidName(e.target.value)} value={name} onChange={(e) => { setName(e.target.value) }} />
                     </div>
                   </div>
                   <div className="col-sm-12">
