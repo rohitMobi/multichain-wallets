@@ -16,6 +16,8 @@ const TransactionsCompoenent = () => {
     const res = await getTransactions();
     console.log("res: ", res);
     if(res.status === 200){
+      var arr = res.data.data.sort((a, b) => { return (Number(b.time) - Number(a.time)) })
+      console.log("arr: ", arr);
       setList(res.data.data);
       dataTablesApply();
     }
@@ -131,7 +133,7 @@ const TransactionsCompoenent = () => {
                               <tr>
                                 <td>{index + 1}</td>
                                 <td>{changeAddressFormat(ele.myaddresses[0])} 
-                                  {/* <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.myaddresses[0]), "Wallet Address")} style={{cursor: "pointer"}}></i></> */}
+                                  <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.myaddresses[0]), "Wallet Address")} style={{cursor: "pointer"}}></i></>
                                 </td>
                                 <td>
                                   {
@@ -144,13 +146,13 @@ const TransactionsCompoenent = () => {
                                 </td>
                                 <td>{changeAddressFormat(ele.blockhash)}</td>
                                 <td>{changeAddressFormat(ele.txid)} 
-                                  {/* <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.txid), "Transaction Id")} style={{cursor: "pointer"}}></i></> */}
+                                  <><i className="fa fa-clone float-right mr-5 text-warning" onClick={() => copyPaste(changeAddressFormat(ele.txid), "Transaction Id")} style={{cursor: "pointer"}}></i></>
                                 </td>
                                 <td>{format(convertDate(ele.time), 'dd MMM, yyyy hh:mm a')}</td>
                               </tr>
                             </>)
                           })
-                          :
+                          : 
                           <><tr><td colSpan={5} className="text-center">No transactions found.</td></tr></>
                         }
                       </tbody>
